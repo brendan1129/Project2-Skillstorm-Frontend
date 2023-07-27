@@ -4,7 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
-
+.centered {
+  text-align: center;
+}
+.left-align {
+  text-align: left;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
