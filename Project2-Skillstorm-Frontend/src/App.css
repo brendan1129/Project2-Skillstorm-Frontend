@@ -1,11 +1,13 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin-top: 0px;
+  width: 100%;
+  text-align: left;
 }
-.centered {
-  text-align: center;
+.card {
+  margin-top: 2%;
+  margin-left: 30%;
+  margin-right: 35%;
+  margin-bottom: 2%;
 }
 .left-align {
   text-align: left;
@@ -38,9 +40,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
 .read-the-docs {
   color: #888;
