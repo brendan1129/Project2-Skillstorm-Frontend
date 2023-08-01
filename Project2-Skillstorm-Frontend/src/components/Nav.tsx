@@ -1,16 +1,22 @@
 import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, redirect } from "react-router-dom";
 import Home from "./Home";
 import EditAccount from "./EditAccount";
 import EditIncomeInformation from "./EditIncomeInformation";
 import Logout from "./Logout";
 import Login from "./Login";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import CreateAccount from "./CreateAccount";
 
 const Nav: FunctionComponent = () => {
     const [expanded, setExpanded] = useState(false)  
   
+    useEffect(() => {
+      // Navigate to the "/home" route when the component is rendered
+      console.log("home");
+      redirect('/home');
+    }, []);
+    
     const items = [
         <a href="/home" key="one" className="usa-nav__link">
           <span>Home</span>

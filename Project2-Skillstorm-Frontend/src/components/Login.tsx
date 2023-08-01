@@ -1,17 +1,17 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import Nav from "./Nav";
 import { Button, Fieldset, Form, GovBanner, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
 
 const Login: FunctionComponent = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
-
   useEffect(() => {
     // Check if there's a user in localStorage
     const user = localStorage.getItem('user');
     if (user) {
       // User is logged in, set isLoggedIn to true
+      console.log(user);
       setLoggedIn(true);
     }
   }, []);
@@ -29,7 +29,7 @@ const Login: FunctionComponent = () => {
 
     // Set isLoggedIn to true
     setLoggedIn(true);
-    redirect("/home");
+    window.location.href = "/home";
   };
 
   // Redirect to another page if user is logged in
@@ -72,7 +72,6 @@ const Login: FunctionComponent = () => {
                     Create Account
                   </ModalHeading>
                   <div className="usa-prose">
-                    <p id="modal-1-description">
                       <Form onSubmit={handleRegistry}>
                       <Label className="usa-label" htmlFor="new-username">Email</Label>
                       <TextInput id="new-username" name="new-username" type="text"></TextInput>
@@ -82,7 +81,6 @@ const Login: FunctionComponent = () => {
                       <TextInput id="new-password-2" name="new-password-2" type="password"></TextInput>
                       <Button type="submit" size="big" style={{margin:"60px"}}>Create</Button>
                       </Form>
-                    </p>
                   </div>
                 </Modal>
             </Form>
