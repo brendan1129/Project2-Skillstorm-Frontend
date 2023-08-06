@@ -1,9 +1,14 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { redirect, useNavigate } from 'react-router-dom';
 import Nav from "./Nav";
 import { Button, Fieldset, Form, GovBanner, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
+import { useTranslation } from 'react-i18next';
+import './i18n.js';
 
 const Login: FunctionComponent = () => {
+
+  const { t, i18n } = useTranslation();
+  
+  console.log(i18n.language);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -32,7 +37,7 @@ const Login: FunctionComponent = () => {
     window.location.href = "/home";
   };
 
-  // Redirect to another page if user is logged in
+  // Redirect to main page if user is logged in
   if (loggedIn) {
     return <>
           <Nav/>
@@ -44,7 +49,7 @@ const Login: FunctionComponent = () => {
         <Header basic={true}>
           <div className="usa-navbar" style={{marginTop: "1%", paddingBottom: "10%", marginLeft: "240px", height: "0px"}}>
             <Title>
-              <a href="/home" title="Home" aria-label="Home"><h2>Tax Processing System</h2></a>
+              <a href="/home" title="Home" aria-label="Home"><h2>{t("Title")}</h2></a>
             </Title>
           </div>
         </Header>
@@ -53,7 +58,7 @@ const Login: FunctionComponent = () => {
           <div className= "bg-white padding-y-3 padding-x-5 border border-base-lighter">
             <Form onSubmit={handleLogin} className= "usa-form usa-form--large margin-bottom-3">
               <Fieldset className="usa-fieldset">
-                <legend className="usa-legend usa-legend--large" style={{paddingTop: "15%", paddingBottom: "15%", textAlign: "center"}}>Enter Login Information</legend>
+                <legend className="usa-legend usa-legend--large" style={{paddingTop: "15%", paddingBottom: "15%", textAlign: "center"}}>{t('Enter Login Info')}</legend>
               </Fieldset>
               <Label className="usa-label" htmlFor="username">Email</Label>
               <TextInput id="username" name="username" type="text"></TextInput>
