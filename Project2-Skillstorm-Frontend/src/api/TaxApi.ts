@@ -61,7 +61,7 @@ type Results = {
 }
 
 // create the API calls
-const taxApi = createApi({
+export const taxApi = createApi({
     reducerPath : 'taxApi',
     baseQuery : fetchBaseQuery({baseUrl : 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
     endpoints : (builder) => ({
