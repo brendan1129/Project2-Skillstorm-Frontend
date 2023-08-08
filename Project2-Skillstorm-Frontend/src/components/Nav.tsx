@@ -4,17 +4,20 @@ import Home from "./Home";
 import EditAccount from "./EditAccount";
 import EditIncomeInformation from "./EditIncomeInformation";
 import Logout from "./Logout";
-import Login from "./Login";
 import { FunctionComponent, useEffect, useState } from "react";
-import CreateAccount from "./CreateAccount";
+import './i18n.js';
+import { useTranslation } from "react-i18next";
 
 const Nav: FunctionComponent = () => {
-    const [expanded, setExpanded] = useState(false)  
-  
+
+    // Mobile expansion hook found in TrussWorks docs
+    const [expanded, setExpanded] = useState(false);
+    // t, i18n for translations
+    const { t, i18n } = useTranslation();
+
     useEffect(() => {
       // Navigate to the "/home" route when the component is rendered
       console.log("home");
-      redirect('/home');
     }, []);
     
     const items = [
@@ -28,20 +31,21 @@ const Nav: FunctionComponent = () => {
           <span>File Taxes</span>
         </a>,
         <a href="/logout" key="four" className="usa-nav__link">
-        <span>Logout</span>
+          <span>Logout</span>
         </a>
     ];
     
   
-    const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded)
+    const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
     
     return (
       <>
         <GovBanner />
-        <Header basic={true}>
-            <div className="usa-navbar" style={{marginTop: "1%", marginLeft: "240px"}}>
+        <Header extended>
+          <div className="usa-nav-container">
+            <div className="usa-navbar">
               <Title>
-                <a href="/home" title="home" aria-label="Home"><h2>Tax Processing System</h2></a>
+                <a href="/home" title="home" aria-label="Home">{t("Login.Title")}</a>
               </Title>
             </div>
           <PrimaryNav
@@ -49,6 +53,7 @@ const Nav: FunctionComponent = () => {
               mobileExpanded={expanded}
               onToggleMobileNav={onClick}>
           </PrimaryNav>
+          </div>
         </Header>
         <main id='main-content'>
           <Router>
@@ -57,8 +62,6 @@ const Nav: FunctionComponent = () => {
               <Route path="/editAcc" element ={<EditAccount/>} />
               <Route path="/editTax" element ={<EditIncomeInformation/>} />
               <Route path="/logout" element ={<Logout/>} />
-              <Route path="/login" element ={<Login/>} />
-              <Route path="/createAccount" element ={<CreateAccount/>} />
             </Routes>
           </Router>
         </main>
