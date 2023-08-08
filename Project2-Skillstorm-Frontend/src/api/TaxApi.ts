@@ -17,6 +17,7 @@ type User = {
     maritalStatus: String
 }
 
+// Form1099 type
 type Form1099 = {
     payerTIN : String,
     email : String,
@@ -34,6 +35,7 @@ type Form1099 = {
     }
 }
 
+// FormW2 type
 type FormW2 = {
     employerTIN : String,
     email : String,
@@ -49,6 +51,7 @@ type FormW2 = {
     }
 }
 
+// Results type
 type Results = {
     email : String,
     year : number,
@@ -57,11 +60,13 @@ type Results = {
     result : number
 }
 
-
+// create the API calls
 const taxApi = createApi({
     reducerPath : 'taxApi',
     baseQuery : fetchBaseQuery({baseUrl : 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
     endpoints : (builder) => ({
+
+        // User endpoints
         findUser : builder.query<User, String>({query : (email) => `users/email?email=${email}`}),
         createUser : builder.mutation<User, User>({
             query : (newUser) => {
@@ -90,6 +95,8 @@ const taxApi = createApi({
                 }
             }
         }),
+
+        // Form 1099 endpoints
         findForm1099 : builder.query<Form1099[], String>({query : (email) => `form1099/email/${email}`}),
         createForm1099 : builder.mutation<Form1099, Form1099>({
             query : (newForm1099) => {
@@ -118,6 +125,8 @@ const taxApi = createApi({
                 }
             }
         }),
+
+        // Form W2 endpoints
         findFormW2 : builder.query<FormW2[], String>({query : (email) => `formW2/email/${email}`}),
         createFormW2 : builder.mutation<FormW2, FormW2>({
             query : (newFormW2) => {
@@ -146,6 +155,8 @@ const taxApi = createApi({
                 }
             }
         }),
+
+        // Results endpoint
         findResults : builder.query<Results, String>({query : (email) => `taxforms/email/${email}`}),
     })
 })
