@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // User type
-type User = {
+export type User = {
     email : String,
     ssn : String,
     firstName : String,
@@ -18,7 +18,7 @@ type User = {
 }
 
 // Form1099 type
-type Form1099 = {
+export type Form1099 = {
     payerTIN : String,
     email : String,
     amountEarned: number,
@@ -36,7 +36,7 @@ type Form1099 = {
 }
 
 // FormW2 type
-type FormW2 = {
+export type FormW2 = {
     employerTIN : String,
     email : String,
     amountEarned: number,
@@ -52,7 +52,7 @@ type FormW2 = {
 }
 
 // Results type
-type Results = {
+export type Results = {
     email : String,
     year : number,
     earned : number,
