@@ -4,18 +4,36 @@ import { initReactI18next } from "react-i18next";
 // npm install react-i18next i18next --save
 // the translations
 // You can move these to a separate JSON file and import them as well.
-const resources = {
-  en: {
-    translation: {
-      "Title": "Tax Processing System",
-      "Enter Login Info": "Enter login Information:"
-    }
-  },
-  sp: {
-    translation: {
-      "Title": "Sistema de Procesamiento de Impuestos",
-      "Enter Login Info": "información para ingresar:"
-    }
+  const resources = {
+    en: {
+        translation: {
+          "Login": {
+            "Title": "Tax Processing System",
+            "Enter Login Info": "Enter login Information:",
+            "Create an Account": "Create an Account",
+            "Full Name": "Full Name",
+            "Email": "Email",
+            "Password": "Password",
+            "Create": "Create",
+            "Retype": "Retype Password",
+            "Login Button": "Login"
+          }
+       }
+    },
+    sp: {
+        translation: {
+          "Login": {
+          "Title": "Sistema de Procesamiento de Impuestos",
+          "Enter Login Info": "Información para Ingresar:",
+          "Create an Account": "Crear una Cuenta",
+          "Full Name": "Nombre Completo",
+          "Email": "Email",
+          "Password": "Contraseña",
+          "Create": "Crear",
+          "Retype": "Vuelva a escribir la contraseña",
+          "Login Button": "Acceso"
+        }
+      }
   }
 };
 i18n
