@@ -41,7 +41,7 @@ i18n
   // This middle ware is going to integrate i18n instance with React application
   .init({
     resources,
-    lng: "sp", // language to use
+    lng: "en", // language to use
     interpolation: {
       escapeValue: false // react already safes from xss
     }

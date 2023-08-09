@@ -17,7 +17,6 @@ const Nav: FunctionComponent = () => {
 
     useEffect(() => {
       // Navigate to the "/home" route when the component is rendered
-      console.log("home");
     }, []);
     
     const items = [

@@ -2,58 +2,58 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // User type
 export type User = {
-    email : String,
-    ssn : String,
-    firstName : String,
-    lastName : String,
+    email : string,
+    ssn : string,
+    firstName : string,
+    lastName : string,
     address : {
-        streetPrimary: String,
-        streetSecondary?: String,
-        city : String,
-        state : String,
+        streetPrimary: string,
+        streetSecondary?: string,
+        city : string,
+        state : string,
         zipCode : number
     },
-    dateOfBirth : String,
-    maritalStatus: String
+    dateOfBirth : Date,
+    maritalStatus: string
 }
 
 // Form1099 type
 export type Form1099 = {
-    payerTIN : String,
-    email : String,
+    payerTIN : string,
+    email : string,
     amountEarned: number,
     amountWithheld: number,
-    businessName?: String,
-    payerFirstName?: String,
-    payerLastName?: String,
+    businessName?: string,
+    payerFirstName?: string,
+    payerLastName?: string,
     address : {
-        streetPrimary: String,
-        streetSecondary?: String,
-        city : String,
-        state : String,
+        streetPrimary: string,
+        streetSecondary?: string,
+        city : string,
+        state : string,
         zipCode : number
     }
 }
 
 // FormW2 type
 export type FormW2 = {
-    employerTIN : String,
-    email : String,
+    employerTIN : string,
+    email : string,
     amountEarned: number,
     amountWithheld: number,
-    employerName: String,
+    employerName: string,
     address : {
-        streetPrimary: String,
-        streetSecondary?: String,
-        city : String,
-        state : String,
+        streetPrimary: string,
+        streetSecondary?: string,
+        city : string,
+        state : string,
         zipCode : number
     }
 }
 
 // Results type
 export type Results = {
-    email : String,
+    email : string,
     year : number,
     earned : number,
     withheld : number,
@@ -67,7 +67,7 @@ export const taxApi = createApi({
     endpoints : (builder) => ({
 
         // User endpoints
-        findUser : builder.query<User, String>({query : (email) => `users/email?email=${email}`}),
+        findUser : builder.query<User, string>({query : (email) => `users/email?email=${email}`}),
         createUser : builder.mutation<User, User>({
             query : (newUser) => {
                 return {
