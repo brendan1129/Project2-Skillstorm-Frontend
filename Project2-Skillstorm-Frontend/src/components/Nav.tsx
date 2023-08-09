@@ -1,9 +1,4 @@
 import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
-import { BrowserRouter as Router, Route, Routes, redirect } from "react-router-dom";
-import Home from "./Home";
-import EditAccount from "./EditAccount";
-import EditIncomeInformation from "./EditIncomeInformation";
-import Logout from "./Logout";
 import { FunctionComponent, useEffect, useState } from "react";
 import './i18n.js';
 import { useTranslation } from "react-i18next";
@@ -55,14 +50,7 @@ const Nav: FunctionComponent = () => {
           </div>
         </Header>
         <main id='main-content'>
-          <Router>
-            <Routes>
-              <Route path="/home" element ={<Home/>}/>
-              <Route path="/editAcc" element ={<EditAccount/>} />
-              <Route path="/editTax" element ={<EditIncomeInformation/>} />
-              <Route path="/logout" element ={<Logout/>} />
-            </Routes>
-          </Router>
+       
         </main>
       </>
     )

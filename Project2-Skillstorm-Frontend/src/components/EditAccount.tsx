@@ -1,18 +1,23 @@
-import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput } from "@trussworks/react-uswds";
+import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert, Modal} from "@trussworks/react-uswds";
 import React from "react";
 import { taxApi, User } from "../api/TaxApi";
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import moment from "moment";
+import { useNavigate } from 'react-router-dom'
+import { render, cleanup } from '@testing-library/react'
+import EditIncomeInformation from "./EditIncomeInformation";
+//import EditIncomeInformation from "./EditIncomeInformation";
 
 
 
 
-const EditAccountForm = () => {
+const EditAccount = () => {
 
     // hooks in the queries from the API
     const {data : user, refetch} = taxApi.useFindUserQuery("jkersey9@gmail.com");
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
+    const navigate = useNavigate();
 
    
     // sets the form to useState so changes can be read
@@ -37,6 +42,7 @@ const EditAccountForm = () => {
         setFormData({...formData, dateOfBirth : newDate})
     }
 
+    //const navigate = useNavigate();
     // sends updated User info when Submit is pressed
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -100,9 +106,20 @@ const EditAccountForm = () => {
         // makes the API call
         updateUser(updatedUser)
             .unwrap()
-            .then()
+            .then( () => {
+               render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"10%"}}/></>)
+               window.setTimeout(() => {
+                cleanup()
+                navigate('/editTax')
+               }, 2000)
+               
+
+          })
             .catch(error => console.error(error))
     }
+
+    
+        
 
     // this if makes sure the user GET API call has finished before the form is built. Date of Birth and Marital Status will not properly populate otherwise
     if (thisUser?.maritalStatus !== undefined) {
@@ -182,4 +199,4 @@ const EditAccountForm = () => {
         
         }
 }
-export default EditAccountForm;
+export default EditAccount;
