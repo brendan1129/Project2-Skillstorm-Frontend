@@ -31,29 +31,18 @@ const EditAccountForm = () => {
 
     })
 
-    console.log(thisUser?.maritalStatus);
-   
-    var dob = moment(String(thisUser?.dateOfBirth)).format('YYYY-MM-DD')
-    console.log(dob)
-    console.log(thisUser?.maritalStatus)
-    
+    // handles the state when the Date of Birth form is changed
     const handleDateChange = date => {
         let newDate = moment(date).toISOString();
         setFormData({...formData, dateOfBirth : newDate})
-        console.log(newDate);
     }
-
-   // const handleTextChange = text => {
-  //     setFormData({})
-  //  }
-
-
 
     // sends updated User info when Submit is pressed
     const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log(formData.dateOfBirth);
-        // creates the User object
+        
+        // checks if any fields were unchanged, as their value will be undefined. This sets them back to defaultValue
         if (typeof(formData.firstName) === 'undefined') {
             formData.firstName = thisUser?.firstName;
         }
@@ -90,6 +79,8 @@ const EditAccountForm = () => {
                 formData.streetSecondary = "SINGLE";
             }
         }
+
+        // creates the User object
         const updatedUser : User = {
             firstName : String(formData.firstName),
             lastName : String(formData.lastName),
@@ -105,7 +96,6 @@ const EditAccountForm = () => {
             },
             maritalStatus : String(formData.maritalStatus)
         }
-        console.log(updatedUser);
 
         // makes the API call
         updateUser(updatedUser)
@@ -113,6 +103,8 @@ const EditAccountForm = () => {
             .then()
             .catch(error => console.error(error))
     }
+
+    // this if makes sure the user GET API call has finished before the form is built. Date of Birth and Marital Status will not properly populate otherwise
     if (thisUser?.maritalStatus !== undefined) {
         return (
             // All classes and components found at https://trussworks.github.io/react-uswds/
@@ -189,8 +181,5 @@ const EditAccountForm = () => {
             );
         
         }
-
-    
-    
 }
 export default EditAccountForm;
