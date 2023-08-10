@@ -7,7 +7,7 @@ function Home() {
     const[userInfo, setUserInfo] = useState('');
 
     function handleLogIn() {
-        window.location.replace("http://localhost:8080/login/login");
+        window.location.replace("http://3.238.52.15.nip.io:8080/login/login");
 
     }
 
