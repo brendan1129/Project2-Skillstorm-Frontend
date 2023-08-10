@@ -1,5 +1,5 @@
 import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput } from "@trussworks/react-uswds";
-import React from "react";
+import { Fragment } from "react";
 
 function EditAccount() {
 
@@ -45,7 +45,7 @@ function EditAccount() {
                             id="filing-status"
                             name="filing-status"
                         >
-                            <React.Fragment key=".0">
+                            <Fragment key=".0">
                             <option>
                                 - Select -{' '}
                             </option>
@@ -64,7 +64,7 @@ function EditAccount() {
                             <option value="value5">
                                 Qualifying Surviving Spouse
                             </option>
-                            </React.Fragment>
+                            </Fragment>
                         </Select>
                     </Fieldset>
                     <Button type="submit" base> Save </Button>

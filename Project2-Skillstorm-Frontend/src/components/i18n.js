@@ -14,24 +14,28 @@ import { initReactI18next } from "react-i18next";
             "Full Name": "Full Name",
             "Email": "Email",
             "Password": "Password",
+            "Login Password": "Password",
             "Create": "Create",
             "Retype": "Retype Password",
-            "Login Button": "Login"
+            "Login Button": "Login",
+            "Provide" : "Please provide an email and password"
           }
        }
     },
     sp: {
         translation: {
           "Login": {
-          "Title": "Sistema de Procesamiento de Impuestos",
-          "Enter Login Info": "Información para Ingresar:",
-          "Create an Account": "Crear una Cuenta",
-          "Full Name": "Nombre Completo",
-          "Email": "Email",
-          "Password": "Contraseña",
-          "Create": "Crear",
-          "Retype": "Vuelva a escribir la contraseña",
-          "Login Button": "Acceso"
+            "Title": "Sistema de Procesamiento de Impuestos",
+            "Enter Login Info": "Información para Ingresar:",
+            "Create an Account": "Crear una Cuenta",
+            "Full Name": "Nombre Completo",
+            "Email": "Email",
+            "Password": "Contraseña",
+            "Login Password": "Contraseña",
+            "Create": "Crear",
+            "Retype": "Vuelva a escribir la contraseña",
+            "Login Button": "Acceso",
+            "Provide" : "Por favor proporcione un correo electrónico y contraseña"
         }
       }
   }
@@ -41,7 +45,7 @@ i18n
   // This middle ware is going to integrate i18n instance with React application
   .init({
     resources,
-    lng: "sp", // language to use
+    lng: "en", // language to use
     interpolation: {
       escapeValue: false // react already safes from xss
     }
