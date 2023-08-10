@@ -8,7 +8,7 @@ import EditAccount from './components/EditAccount';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import EditIncomeInformation from "./components/EditIncomeInformation";
-import Logout from "./components/Logout";
+import Results from "./components/Results";
 import { Provider } from "react-redux";
 import store from './store';
 
@@ -45,7 +45,7 @@ export default function App() {
               <Route path="/home" element ={<Home/>}/>
               <Route path="/editAcc" element ={<EditAccount/>} />
               <Route path="/editTax" element ={<EditIncomeInformation/>} />
-              <Route path="/logout" element ={<Logout/>} />
+              <Route path="/results" element ={<Results/>} />
             </Routes>
           </Router>
           </Provider>

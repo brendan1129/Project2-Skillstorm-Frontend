@@ -24,8 +24,8 @@ const Nav: FunctionComponent = () => {
         <a href="/editTax" key="three" className="usa-nav__link">
           <span>File Taxes</span>
         </a>,
-        <a href="/logout" key="four" className="usa-nav__link">
-          <span>Logout</span>
+        <a href="/results" key="four" className="usa-nav__link">
+          <span>Results</span>
         </a>
     ];
     

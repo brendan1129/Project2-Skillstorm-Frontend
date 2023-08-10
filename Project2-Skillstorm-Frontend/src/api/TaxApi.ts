@@ -37,7 +37,7 @@ export type Form1099 = {
 
 // FormW2 type
 export type FormW2 = {
-    employerTIN : string,
+    employerEIN : string,
     email : string,
     amountEarned: number,
     amountWithheld: number,
@@ -120,7 +120,7 @@ export const taxApi = createApi({
             query : (deleteForm1099) => {
                 return {
                     method : 'DELETE',
-                    url : 'form1099',
+                    url : 'form1099/delete/' + (deleteForm1099.email) + "/" + (deleteForm1099.payerTIN),
                     body : deleteForm1099
                 }
             }
@@ -150,7 +150,7 @@ export const taxApi = createApi({
             query : (deleteFormW2) => {
                 return {
                     method : 'DELETE',
-                    url : 'formW2',
+                    url : 'formW2/delete/' + (deleteFormW2.email) + "/" + (deleteFormW2.employerEIN),
                     body : deleteFormW2
                 }
             }

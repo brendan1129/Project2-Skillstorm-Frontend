@@ -1,13 +1,10 @@
-import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert, Modal} from "@trussworks/react-uswds";
+import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert} from "@trussworks/react-uswds";
 import React from "react";
 import { taxApi, User } from "../api/TaxApi";
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import moment from "moment";
 import { useNavigate } from 'react-router-dom'
 import { render, cleanup } from '@testing-library/react'
-import EditIncomeInformation from "./EditIncomeInformation";
-//import EditIncomeInformation from "./EditIncomeInformation";
-
 
 
 
@@ -46,7 +43,6 @@ const EditAccount = () => {
     // sends updated User info when Submit is pressed
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log(formData.dateOfBirth);
         
         // checks if any fields were unchanged, as their value will be undefined. This sets them back to defaultValue
         if (typeof(formData.firstName) === 'undefined') {
@@ -107,11 +103,14 @@ const EditAccount = () => {
         updateUser(updatedUser)
             .unwrap()
             .then( () => {
-               render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"10%"}}/></>)
+                // shows Success alert
+               render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
+               
+               // transitions to the editTax page after 1.5 seconds
                window.setTimeout(() => {
                 cleanup()
                 navigate('/editTax')
-               }, 2000)
+               }, 1500)
                
 
           })
