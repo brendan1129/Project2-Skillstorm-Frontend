@@ -17,6 +17,12 @@ export type User = {
     maritalStatus: string
 }
 
+export type Auth= {
+    email : string,
+    password : string,
+    
+}
+
 // Form1099 type
 export type Form1099 = {
     payerTIN : string,
