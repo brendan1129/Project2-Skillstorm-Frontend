@@ -63,11 +63,24 @@ export type Results = {
 // create the API calls
 export const taxApi = createApi({
     reducerPath : 'taxApi',
-    baseQuery : fetchBaseQuery({baseUrl : 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
+    baseQuery : fetchBaseQuery({baseUrl : 'http://localhost:8080/'}),
     endpoints : (builder) => ({
 
         // User endpoints
         findUser : builder.query<User, string>({query : (email) => `users/email?email=${email}`}),
+        findUserAuth : builder.query<User, void>({query : () => {
+            return{
+                credentials : 'include',
+                method : 'GET',
+                url : `users/authorized`,
+                headers : {
+                    "Access-Control-Allow-Methods" : "GET, PUT, POST, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers" : "Content-Type, X-Requested-With, X-HTTP-Method-Override, Accept",
+                    "Access-Control-Allow-Origin" : "http://localhost:5173"
+                }
+            }
+        }
+        }),
         createUser : builder.mutation<User, User>({
             query : (newUser) => {
                 return {

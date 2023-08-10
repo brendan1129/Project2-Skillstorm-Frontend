@@ -15,7 +15,7 @@ const Nav: FunctionComponent = () => {
     }, []);
     
     const items = [
-        <a href="/home" key="one" className="usa-nav__link">
+        <a href="/" key="one" className="usa-nav__link">
           <span>Home</span>
         </a>,
         <a href="/editAcc" key="two" className="usa-nav__link">
@@ -26,7 +26,11 @@ const Nav: FunctionComponent = () => {
         </a>,
         <a href="/results" key="four" className="usa-nav__link">
           <span>Results</span>
-        </a>
+        </a>,
+        <a href="/test" key="five" className="usa-nav__link">
+        <span>Test</span>
+      </a>
+        
     ];
     
   
@@ -39,7 +43,7 @@ const Nav: FunctionComponent = () => {
           <div className="usa-nav-container">
             <div className="usa-navbar">
               <Title>
-                <a href="/home" title="home" aria-label="Home">{t("Login.Title")}</a>
+                <a href="/" title="home" aria-label="Home">{t("Login.Title")}</a>
               </Title>
             </div>
           <PrimaryNav

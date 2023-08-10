@@ -11,7 +11,7 @@ import { render, cleanup } from '@testing-library/react'
 const EditAccount = () => {
 
     // hooks in the queries from the API
-    const {data : user, refetch} = taxApi.useFindUserQuery("jkersey9@gmail.com");
+    const {data : user} = taxApi.useFindUserAuthQuery();
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();

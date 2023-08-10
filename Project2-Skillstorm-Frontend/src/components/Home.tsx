@@ -1,7 +1,16 @@
 import { Button, Fieldset, Form, Grid, GridContainer, Label, TextInput } from "@trussworks/react-uswds";
+import { useState } from "react";
 
 function Home() {
-    // Home component implementation
+    
+    const[accessToken, setAccessToken] = useState('');
+    const[userInfo, setUserInfo] = useState('');
+
+    function handleLogIn() {
+        window.location.replace("http://localhost:8080/login/login");
+
+    }
+
     return (
         // All classes and components found at https://trussworks.github.io/react-uswds/
         // and https://designsystem.digital.gov/how-to-use-uswds/
@@ -10,7 +19,7 @@ function Home() {
               <Grid row className="margin-x-neg-205 flex-justify-center">
                     <div className= "bg-white padding-y-3 padding-x-5 border border-base-lighter">
                         <h1>Welcome</h1>
-                        <Button className="usa-button--big" style={{position:"relative", left:"25%"}}type="submit" > Log In </Button>
+                        <Button onClick={handleLogIn} className="usa-button--big" style={{position:"relative", left:"25%"}}type="button" > Log In </Button>
                         
                     </div>
                 </Grid>

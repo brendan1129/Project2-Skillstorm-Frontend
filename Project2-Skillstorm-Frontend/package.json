@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@trussworks/react-uswds": "^5.1.1",
+    "cors": "^2.8.5",
     "i18next": "^23.4.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
