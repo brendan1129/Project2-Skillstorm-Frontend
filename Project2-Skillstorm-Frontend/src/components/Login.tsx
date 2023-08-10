@@ -1,28 +1,42 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+/*import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { Button, Fieldset, Form, GovBanner, Grid, GridContainer, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
 import { useTranslation } from 'react-i18next';
 import './i18n.js';
 import React from "react";
+import { taxApi } from "../api/TaxApi.js";
 
 const Login: FunctionComponent = () => {
 
   // t, i18n for translations
   const { t, i18n } = useTranslation();
-  // useState for hiding password
-  const [showPassword, setShowPassword] = useState(false);
+  
+  const checkAuth = taxApi.useFindAuthQuery();
 
-  // Registration Modal
-  const modalRef = useRef<ModalRef>(null);
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    
+    // checks if any fields were unchanged, as their value will be undefined. This sets them back to defaultValue
+    
 
-  const handleRegistry = () => {
-    // TODO: Register User
-  };
+    /*
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    // Set user in localStorage, temporary
+    // makes the API call
+    checkAuth(updatedUser)
+        .unwrap()
+        .then( () => {
+            // shows Success alert
+           render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
+           
+           // transitions to the editTax page after 1.5 seconds
+           window.setTimeout(() => {
+            cleanup()
+            navigate('/editTax')
+           }, 1500)
+           
 
-    localStorage.setItem('user', 'username');
-  };
+      })
+        .catch(error => console.error(error))
+}
 
   return (
   <>
@@ -97,4 +111,4 @@ const Login: FunctionComponent = () => {
         );
 }
 
-export default Login;
+export default Login;*/

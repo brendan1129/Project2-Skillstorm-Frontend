@@ -20,7 +20,7 @@ export type User = {
 export type Auth= {
     email : string,
     password : string,
-    
+    role : string
 }
 
 // Form1099 type
@@ -73,6 +73,15 @@ export const taxApi = createApi({
     endpoints : (builder) => ({
 
         // User endpoints
+        findAuth : builder.query<string, void>({
+            query : (authString) => {
+                return {
+                    'Authorization': "Basic " + authString,
+                    method : 'GET',
+                    url : 'auth/email',
+                }
+            }
+        }),
         findUser : builder.query<User, string>({query : (email) => `users/email?email=${email}`}),
         createUser : builder.mutation<User, User>({
             query : (newUser) => {

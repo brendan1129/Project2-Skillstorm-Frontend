@@ -11,7 +11,7 @@ import EditIncomeInformation from "./components/EditIncomeInformation";
 import Results from "./components/Results";
 import { Provider } from "react-redux";
 import store from './store';
-import Login from './components/Login';
+//import Login from './components/Login';
 
 export default function App() {
 
@@ -43,7 +43,7 @@ export default function App() {
       <Router>
         <Nav />
             <Routes>
-              <Route path="/home" element ={<Login/>}/>
+              <Route path="/home" element ={<Home/>}/>
               <Route path="/editAcc" element ={<EditAccount/>} />
               <Route path="/editTax" element ={<EditIncomeInformation/>} />
               <Route path="/results" element ={<Results/>} />
