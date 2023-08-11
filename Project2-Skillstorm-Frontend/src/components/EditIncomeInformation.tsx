@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { taxApi, Form1099, FormW2 } from '../api/TaxApi';
 import { useNavigate } from 'react-router-dom'
 import { render, cleanup } from '@testing-library/react'
+import { useTranslation } from 'react-i18next';
 
 
 function EditIncomeInformation() {
@@ -18,7 +19,7 @@ function EditIncomeInformation() {
   const [deleteW2] = taxApi.useDeleteFormW2Mutation();
   const thisForm1099s = form1099s;
   const thisFormW2 = formW2;
-
+  const {t, i18n} = useTranslation();
   // useNavigate to change pages/refresh state
   const navigate = useNavigate();
 
@@ -161,7 +162,7 @@ const handleSubmit = (event: any) => {
                       <td>{form.payerTIN}</td>
                       <td>${form.amountEarned}</td>
                       <td>${form.amountWithheld}</td>
-                      <td><Button className="usa-button--secondary margin-right-0 margin-bottom-2" type="button" onClick={() => handle1099Delete(form)}>Delete</Button></td>
+                      <td><Button className="usa-button--secondary margin-right-0 margin-bottom-2" type="button" onClick={() => handle1099Delete(form)}>{t("Form1099Table.Remove")}</Button></td>
                   </tr>
                   );
               })}
@@ -178,7 +179,7 @@ const handleSubmit = (event: any) => {
                       <td>{form.employerEIN}</td>
                       <td>${form.amountEarned}</td>
                       <td>${form.amountWithheld}</td>
-                      <td><Button className="usa-button--secondary margin-right-0 margin-bottom-2" accentStyle="warm" type="button" onClick={() => handleW2Delete(form)}>Delete</Button></td>
+                      <td><Button className="usa-button--secondary margin-right-0 margin-bottom-2" accentStyle="warm" type="button" onClick={() => handleW2Delete(form)}>{t("Form1099Table.Remove")}</Button></td>
                   </tr>
                   );
               })}
@@ -199,7 +200,7 @@ const handleSubmit = (event: any) => {
       return (
         // Return W2 Form values        
         <div style={{borderBottom:"solid"}}>
-            <Label htmlFor='ein'>Employer Identification Number (EIN)</Label>
+            <Label htmlFor='ein'>{t("EditIncome.Employer Identification Number (EIN)")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, employerEIN : e.target.value})} 
             id="ein" 
             name="ein" 
@@ -209,12 +210,12 @@ const handleSubmit = (event: any) => {
               onBlur={(e) => {
                 const ein = e.target.value;
                 if (!ein.match(/^[0-9]{2}-[0-9]{7}$/)) {
-                alert("Please enter an EIN in the format XX-XXXXXX");
+                alert(t("EditIncome.Please enter an EIN in the format XX-XXXXXX"));
                 }
             }}>
             
             </TextInput>
-            <Label htmlFor='w2-amount-earned'>Amount Earned</Label>
+            <Label htmlFor='w2-amount-earned'>{t("EditIncome.Amount Earned")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountEarned : parseInt(e.target.value)})} 
             id="w2-amount-earned" 
             name="w2-amount-earned" 
@@ -223,10 +224,10 @@ const handleSubmit = (event: any) => {
               onBlur={(e) => {
                 const earned = e.target.value;
                 if (!earned.match(/^((1000000000)|([0-9]{1,9}))$/)) {
-                  alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
+                  alert(t("EditIncome.The amount entered in the earned field must be between 0 and 1,000,000,000"));
                 }
               }}></TextInput>
-            <Label htmlFor='w2-amount-withheld'>Amount Withheld</Label>
+            <Label htmlFor='w2-amount-withheld'>{t("EditIncome.Amount Withheld")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountWithheld : parseInt(e.target.value)})} 
             id="w2-amount-withheld" 
             name="w2-amount-withheld" 
@@ -235,20 +236,20 @@ const handleSubmit = (event: any) => {
             onBlur={(e) => {
               const withheld = e.target.value;
               if (!withheld.match(/^((1000000000)|([0-9]{1,9}))$/)) {
-                alert("The amount entered in the withheld field must be between 0 and 1,000,000,000");
+                alert(t("EditIncome.The amount entered in the withheld field must be between 0 and 1,000,000,000"));
               }
             }}></TextInput>
-            <legend className="usa-legend usa-legend"><b>Employer Information</b></legend>
-            <Label htmlFor='w2-employer-name'>Employer Name</Label>
+            <legend className="usa-legend usa-legend"><b>{t("EditIncome.Employer Information")}</b></legend>
+            <Label htmlFor='w2-employer-name'>{t("EditIncome.Employer Name")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, employerName : e.target.value})} id="w2-employer-name" name="w2-employer-name" type="text"></TextInput> 
-            <legend className="usa-legend usa-legend"><b>Employer Address</b></legend>
-            <Label className="usa-label" htmlFor="w2-employer-street-primary">Street Primary</Label>
+            <legend className="usa-legend usa-legend"><b>{t("EditIncome.Employer Address")}</b></legend>
+            <Label className="usa-label" htmlFor="w2-employer-street-primary">{t("EditIncome.Street Primary")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, streetPrimary : e.target.value})} id="w2-employer-street-primary" name="w2-employer-street-primary" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="w2-employer-street-secondary">Street Secondary</Label>
+            <Label className="usa-label" htmlFor="w2-employer-street-secondary">{t("EditIncome.Street Secondary")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, streetSecondary : e.target.value})} id="w2-employer-street-secondary" name="w2-employer-street-secondary" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="w2-employer-city">City</Label>
+            <Label className="usa-label" htmlFor="w2-employer-city">{t("EditIncome.City")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, city : e.target.value})} id="w2-employer-city" name="w2-employer-city" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="w2-employer-state">State</Label>
+            <Label className="usa-label" htmlFor="w2-employer-state">{t("EditIncome.State")}</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, state : e.target.value})} 
             id="w2-employer-state" 
             name="w2-employer-state" 
@@ -257,10 +258,10 @@ const handleSubmit = (event: any) => {
             onBlur={(e) => {
                 const state = e.target.value;
                 if(!state.match(/^[A-Z]{2}$/)) {
-                    alert("Please enter a valid business state abbreviation");
+                    alert(t("EditIncome.Please enter a valid business state abbreviation"));
                 }
             }}></TextInput>
-            <Label className="usa-label" htmlFor="w2-employer-zip">Zip Code</Label>      
+            <Label className="usa-label" htmlFor="w2-employer-zip">{t("EditIncome.Zip Code")}</Label>      
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, zipCode : parseInt(e.target.value)})} id="w2-employer-zip" name="w2-employer-zip" type="text"></TextInput>
             <Button className="usa-button--accent-cool" style={{marginBottom:"25px"}} onClick={handleNewW2Submit}type="button"> Submit Form </Button>   
         </div>
@@ -269,7 +270,7 @@ const handleSubmit = (event: any) => {
       return (
         // Render 1099 Form Values
         <div style={{borderBottom:"solid"}}>
-            <Label htmlFor='tin'>Payer's TIN</Label>
+            <Label htmlFor='tin'>{t("EditIncome.Payer's TIN")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, payerTIN : e.target.value})} 
             id="tin" 
             name="tin" 
@@ -282,7 +283,7 @@ const handleSubmit = (event: any) => {
                   alert("Please enter a TIN that begins with 9 in the format XXX-XX-XXXX");
                 }
             }}></TextInput>
-            <Label htmlFor='1099-amount-earned'>Amount Earned</Label>
+            <Label htmlFor='1099-amount-earned'>{t("EditIncome.Amount Earned")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountEarned : parseInt(e.target.value)})} 
             id="1099-amount-earned" 
             name="1099-amount-earned" 
@@ -294,7 +295,7 @@ const handleSubmit = (event: any) => {
                 alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
               }
             }}></TextInput>
-            <Label htmlFor='1099-amount-withheld'>Amount Withheld</Label>
+            <Label htmlFor='1099-amount-withheld'>{t("EditIncome.Amount Withheld")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountWithheld : parseInt(e.target.value)})} 
             id="1099-amount-withheld" 
             name="1099-amount-withheld" 
@@ -306,17 +307,17 @@ const handleSubmit = (event: any) => {
                 alert("The amount entered in the withheld field must be between 0 and 1,000,000,000");
               }
             }}></TextInput>
-            <legend className="usa-legend usa-legend"><b>Employer Information</b></legend>
-            <Label htmlFor='1099-employer'>Employer Name</Label>
+            <legend className="usa-legend usa-legend"><b>{t("EditIncome.Employer Information")}</b></legend>
+            <Label htmlFor='1099-employer'>{t("EditIncome.Employer Name")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, businessName : e.target.value})} id="1099-employer" name="1099-employer" type="text"></TextInput>
-            <legend className="usa-legend usa-legend"><b>Employer Address</b></legend>
-            <Label className="usa-label" htmlFor="1099-employer-street-primary">Street Primary</Label>
+            <legend className="usa-legend usa-legend"><b>{t("EditIncome.Employer Address")}</b></legend>
+            <Label className="usa-label" htmlFor="1099-employer-street-primary">{t("EditIncome.Street Primary")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, streetPrimary : e.target.value})} id="1099-employer-street-primary" name="1099-employer-street-primary" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="1099-employer-street-secondary">Street Secondary</Label>
+            <Label className="usa-label" htmlFor="1099-employer-street-secondary">{t("EditIncome.Street Secondary")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, streetSecondary : e.target.value})} id="1099-employer-street-secondary" name="1099-employer-street-secondary" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="1099-employer-city">City</Label>
+            <Label className="usa-label" htmlFor="1099-employer-city">{t("EditIncome.City")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, city : e.target.value})} id="1099-employer-city" name="1099-employer-city" type="text"></TextInput>
-            <Label className="usa-label" htmlFor="1099-employer-state">State</Label>
+            <Label className="usa-label" htmlFor="1099-employer-state">{t("EditIncome.State")}</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, state : e.target.value})} 
             id="1099-employer-state" 
             name="1099-employer-state" 
@@ -327,7 +328,7 @@ const handleSubmit = (event: any) => {
                   alert("Please enter a valid employer state abbreviation");
               }
             }}></TextInput>
-            <Label className="usa-label" htmlFor="1099-employer-zip">Zip Code</Label>      
+            <Label className="usa-label" htmlFor="1099-employer-zip">{t("EditIncome.Zip Code")}</Label>      
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, zipCode : parseInt(e.target.value)})} id="1099-employer-zip" name="1099-employer-zip" type="text"></TextInput>                     
             <Button className="usa-button--accent-cool" style={{marginBottom:"25px"}} onClick={handleNew1099Submit}type="button"> Submit Form </Button>
         </div>
@@ -336,28 +337,30 @@ const handleSubmit = (event: any) => {
   };
 
   return(
-    <div className="bg-base-lightest ">
-    <GridContainer   className="usa-section ">
+    <div className="bg-base-lightest">
+    <GridContainer   className="usa-section">
       <Grid row className="margin-x-neg-05 flex-justify-center">
-        <div className= "bg-white  padding-y-3 padding-x-15 border border-base-lighter justify-center">
-          <Form onSubmit={handleSubmit} className= "usa-form usa-form--large margin-bottom-3 ">
+        <div className= "bg-white  padding-y-3 padding-x-15 border border-base-lighter" >
+        <div style={{marginLeft: "0%"}}>
+          <Form onSubmit={handleSubmit} className= "usa-form usa-form--large margin-bottom-3" >
             <Fieldset className="usa-fieldset ">
             <Grid row>
               <Grid col>
-                <h2 className='text-centered'>Submitted Forms</h2>
+                <h2 className='text-centered'>{t("EditIncome.Submitted Forms")}</h2>
               </Grid>
             </Grid>
             <Grid row>
               <Grid col>
+                <div style={{textAlign: "center"}}>
                 <Table>
                   <thead>
                       <tr>
-                          <th>Form Type</th>
-                          <th>Employer</th>
-                          <th>Employer Tax ID</th>
-                          <th>Amount Earned</th>
-                          <th>Amount Withheld</th>
-                          <th>Remove</th>
+                        <th>{t("Form1099Table.Form Type")}</th>
+                        <th>{t("Form1099Table.Employer")}</th>
+                        <th>{t("Form1099Table.Employer Tax ID")}</th>
+                        <th>{t("Form1099Table.Amount Earned")}</th>
+                        <th>{t("Form1099Table.Amount Withheld")}</th>
+                        <th>{t("Form1099Table.Remove")}</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -365,12 +368,13 @@ const handleSubmit = (event: any) => {
                     {handleTable(thisFormW2, "W2")}
                   </tbody>
                 </Table>
+                </div>
               </Grid>
             </Grid>
-          <Button className="usa-button--big" accentStyle='warm' type="submit" style={{position:"relative", left:"25%"}} base> Calculate Results </Button>
+          <Button className="usa-button--big" accentStyle='warm' type="submit" style={{position:"relative", left:"25%"}} base> {t("EditIncome.Calculate Results")} </Button>
 
-              <h2>Add Forms</h2>
-              <Label htmlFor='income-type'>Income Type</Label>
+              <h2>{t("EditIncome.Add Forms")}</h2>
+              <Label htmlFor='income-type'>{t("EditIncome.Income Type")}</Label>
               <Select
                 id="income-type"
                 name="income-type"
@@ -378,7 +382,7 @@ const handleSubmit = (event: any) => {
               >
                 <React.Fragment key=".0">
                   <option>
-                    - Select -{' '}
+                  {t("EditIncome.Select")}{' '}
                   </option>
                   <option value="formW2">
                     W2
@@ -392,6 +396,7 @@ const handleSubmit = (event: any) => {
               
             </Fieldset>
           </Form>
+          </div>
         </div>
       </Grid>
     </GridContainer>

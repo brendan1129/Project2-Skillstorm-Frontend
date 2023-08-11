@@ -1,7 +1,8 @@
-import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
+import { Address, Footer, FooterNav, GovBanner, Grid, Header, Logo, PrimaryNav, SocialLinks, Title } from "@trussworks/react-uswds";
 import { FunctionComponent, useEffect, useState } from "react";
 import './i18n.js';
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 const Nav: FunctionComponent = () => {
 
@@ -16,19 +17,32 @@ const Nav: FunctionComponent = () => {
     
     const items = [
         <a href="/home" key="one" className="usa-nav__link">
-          <span>Home</span>
+          <span>{t("Nav.Home")}</span>
         </a>,
         <a href="/editAcc" key="two" className="usa-nav__link">
-          <span>Profile</span>
+          <span>{t("Nav.Profile")}</span>
         </a>,
         <a href="/editTax" key="three" className="usa-nav__link">
-          <span>File Taxes</span>
+          <span>{t("Nav.File Taxes")}</span>
         </a>,
         <a href="/results" key="four" className="usa-nav__link">
-          <span>Results</span>
+          <span>{t("Nav.Results")}</span>
         </a>
     ];
-    
+    const footerPrimary = (
+      <></>
+    )
+  
+    const footerSecondary = (
+      <>
+      <div style={{bottom: "0px"}}>
+        <Grid row gap>
+          <Grid className="usa-footer__contact-links" mobileLg={{ col: 6 }}>
+          </Grid>
+        </Grid>
+        </div>
+      </>
+    )
   
     const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
     

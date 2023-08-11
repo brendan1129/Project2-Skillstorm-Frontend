@@ -3,6 +3,8 @@ import { taxApi, Form1099 } from '../api/TaxApi';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react'
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Form1099Table({tableData}) {
 
@@ -10,7 +12,7 @@ export default function Form1099Table({tableData}) {
 
     const [delete1099] =  taxApi.useDeleteForm1099Mutation()
    // const forceUpdate = useForceUpdate()
-
+   const {t, i18n} = useTranslation();
 
   // function useForceUpdate(){
       const [value, setValue] = useState(0); // integer state
@@ -50,12 +52,12 @@ export default function Form1099Table({tableData}) {
             <Table>
                 <thead>
                     <tr>
-                        <th>Form Type</th>
-                        <th>Employer</th>
-                        <th>Employer Tax ID</th>
-                        <th>Amount Earned</th>
-                        <th>Amount Withheld</th>
-                        <th>Remove</th>
+                        <th>{t("Form1099Table.Form Type")}</th>
+                        <th>{t("Form1099Table.Employer")}</th>
+                        <th>{t("Form1099Table.Employer Tax ID")}</th>
+                        <th>{t("Form1099Table.Amount Earned")}</th>
+                        <th>{t("Form1099Table.Amount Withheld")}</th>
+                        <th>{t("Form1099Table.Remove")}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +70,7 @@ export default function Form1099Table({tableData}) {
                                 <td>${form1099.amountEarned}</td>
                                 <td>${form1099.amountWithheld}</td>
                                 
-                                <td><Button className="usa-button--accent-warm margin-right-0 margin-bottom-2" type="button" onClick={() => handleChange(form1099)}>Delete</Button></td>
+                                <td><Button className="usa-button--accent-warm margin-right-0 margin-bottom-2" type="button" onClick={() => handleChange(form1099)}>{t("Form1099Table.Delete")}</Button></td>
                                 </tr>
                         );
                     })}
