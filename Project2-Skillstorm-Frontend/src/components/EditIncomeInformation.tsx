@@ -10,8 +10,9 @@ import { render, cleanup } from '@testing-library/react'
 function EditIncomeInformation() {
 
   // add API calls
-  const {data : form1099s, } = taxApi.useFindForm1099Query("jkersey9@gmail.com");
-  const {data : formW2 } = taxApi.useFindFormW2Query("jkersey9@gmail.com");
+  const email = String(localStorage.getItem("email"))
+  const {data : form1099s, } = taxApi.useFindForm1099Query(email);
+  const {data : formW2 } = taxApi.useFindFormW2Query(email);
   const [create1099] = taxApi.useCreateForm1099Mutation();
   const [createW2] = taxApi.useCreateFormW2Mutation();
   const [delete1099] =  taxApi.useDeleteForm1099Mutation();
@@ -70,7 +71,7 @@ function EditIncomeInformation() {
     // creates the 1099 object
     const newForm1099 : Form1099 = {
         payerTIN : String(form1099Data?.payerTIN),
-        email : "jkersey9@gmail.com",
+        email : email,
         businessName : String(form1099Data?.businessName),
         address : {
             streetPrimary : String(form1099Data.streetPrimary),
@@ -109,7 +110,7 @@ const handleNewW2Submit = (event: any) => {
   // creates the W2 object
   const newFormW2 : FormW2 = {
       employerEIN : String(formW2Data?.employerEIN),
-      email : "jkersey9@gmail.com",
+      email : email,
       employerName : String(formW2Data?.employerName),
       address : {
           streetPrimary : String(formW2Data.streetPrimary),

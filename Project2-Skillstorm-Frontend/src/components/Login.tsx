@@ -2,10 +2,13 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { Button, Fieldset, Form, GovBanner, Grid, GridContainer, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'
-import React from "react";
 import { Auth, taxApi } from "../api/TaxApi.js";
 
 const Login: FunctionComponent = () => {
+
+  
+
+  
 
   // t, i18n for translations
   const { t, i18n } = useTranslation();
@@ -24,10 +27,6 @@ const Login: FunctionComponent = () => {
   // Registration Modal
   const modalRef = useRef<ModalRef>(null);
 
-  const handleRegistry = () => {
-    // TODO: Register User
-  };
-
   const handleLogin = (event: any) => {
     event.preventDefault();
 
@@ -37,26 +36,43 @@ const Login: FunctionComponent = () => {
         role : "USER"
      }
 
+     fetch("http://localhost:8080/auth/login", {
+      headers: {
+        "Content-Type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify(newAuth),
+    })
+    .then((response) => Promise.all([response.json(), response.headers]))
+    .then(([body, headers]) => {
 
+      localStorage.setItem("JWT", JSON.stringify((headers.get("authorization"))));
+      localStorage.setItem("email", JSON.stringify((body.email)))
+      
+    });
+navigate('/editAcc')
+  }
 
-    // makes the API call
-    checkAuth(newAuth)
-        .unwrap()
-        .then( data => ({ headers :  
+  const handleRegistry = (event: any) => {
+    event.preventDefault();
 
-          const authValue = data.headers.get("authorization");
-          console.log(authValue)
-            // shows Success alert
-         //  render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
-           
-           // transitions to the editTax page after 1.5 seconds
-           
-            navigate('/editTax')          
+     const regAuth : Auth = {
+        email : String(authData.email),
+        password : String(authData.password),
+        role : "USER"
+     }
 
-      })
-        .catch(error => console.error(error))
-}
+    fetch("http://localhost:8080/auth/register", {
+      headers: {
+        "Content-Type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify(regAuth),
+    })
+    .then();
+    navigate(0)
 
+  }
   return (
   <>
         <main id="main-content">
@@ -96,14 +112,12 @@ const Login: FunctionComponent = () => {
                   </ModalHeading>
                   <div className="usa-prose">
                       <Form onSubmit={handleRegistry}>
-                      <Label className="usa-label" htmlFor="new-name">{t("Login.Full Name")}</Label>
-                      <TextInput id="new-name" name="new-name" type="text"></TextInput>
                       <Label className="usa-label" htmlFor="new-username">{t("Login.Email")}</Label>
-                      <TextInput id="new-username" name="new-username" type="text"></TextInput>
+                      <TextInput onChange={(e) => setAuthData({...authData, email : e.target.value})} id="new-username" name="new-username" type="text"></TextInput>
                       <Label className="usa-label" htmlFor="new-password">{t("Login.Password")}</Label>
                       <TextInput id="new-password" name="new-password" type="password"></TextInput>
                       <Label className="usa-label" htmlFor="new-password-2">{t("Login.Retype")}</Label>
-                      <TextInput id="new-password-2" name="new-password-2" type="password"></TextInput>
+                      <TextInput onChange={(e) => setAuthData({...authData, password : e.target.value})} id="new-password-2" name="new-password-2" type="password"></TextInput>
                       <Button type="submit" size="big" style={{margin:"60px"}}>{t("Login.Create")}</Button>
                       </Form>
                   </div>

@@ -66,23 +66,42 @@ export type Results = {
     result : number
 }
 
+const jwt = localStorage.getItem("JWT")
+
+
 // create the API calls
 export const taxApi = createApi({
+   
     reducerPath : 'taxApi',
-    baseQuery : fetchBaseQuery({baseUrl : 'http://localhost:8080/'}),
+    
+    baseQuery : fetchBaseQuery({baseUrl: 'http://localhost:8080/'}),
     endpoints : (builder) => ({
 
         // User endpoints
         findAuth : builder.mutation<string, Auth>({
             query : (checkAuth) => {
+                
                 return {
                     method : 'POST',
-                    url : 'auth/login',
+                    url : 'http://localhost:8080/auth/login',
+                    headers : {
+                        "Access-Control-Allow-Origin": "*"
+                    },
                     body : checkAuth
+                    
                 }
             }
         }),
-        findUser : builder.query<User, string>({query : (email) => `users/email?email=${email}`}),
+        findUser : builder.query<User, string>({
+            query : (email) => {
+                return {
+                    url: `users/email?email=${email}`,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`,
+                        "Access-Control-Allow-Origin": "*"
+                    }
+                }
+        }}),
         createUser : builder.mutation<User, User>({
             query : (newUser) => {
                 return {
@@ -97,7 +116,10 @@ export const taxApi = createApi({
                 return {
                     method : 'PUT',
                     url : 'users/user',
-                    body : updateUser
+                    body : updateUser,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -106,6 +128,9 @@ export const taxApi = createApi({
                 return {
                     method : 'DELETE',
                     url : 'users/user',
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    },
                     body : deleteUser
                 }
             }
@@ -118,7 +143,10 @@ export const taxApi = createApi({
                 return {
                     method : 'POST',
                     url : 'form1099',
-                    body : newForm1099
+                    body : newForm1099,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -127,7 +155,10 @@ export const taxApi = createApi({
                 return {
                     method : 'PUT',
                     url : 'form1099',
-                    body : updateForm1099
+                    body : updateForm1099,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -136,7 +167,10 @@ export const taxApi = createApi({
                 return {
                     method : 'DELETE',
                     url : 'form1099/delete/' + (deleteForm1099.email) + "/" + (deleteForm1099.payerTIN),
-                    body : deleteForm1099
+                    body : deleteForm1099,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -148,7 +182,10 @@ export const taxApi = createApi({
                 return {
                     method : 'POST',
                     url : 'formW2',
-                    body : newFormW2
+                    body : newFormW2,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -157,7 +194,10 @@ export const taxApi = createApi({
                 return {
                     method : 'PUT',
                     url : 'formW2',
-                    body : updateFormW2
+                    body : updateFormW2,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
@@ -166,12 +206,17 @@ export const taxApi = createApi({
                 return {
                     method : 'DELETE',
                     url : 'formW2/delete/' + (deleteFormW2.email) + "/" + (deleteFormW2.employerEIN),
-                    body : deleteFormW2
+                    body : deleteFormW2,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`
+                    }
                 }
             }
         }),
+        
 
         // Results endpoint
         findResults : builder.query<Results, String>({query : (email) => `taxforms/email/${email}`}),
     })
+    
 })
