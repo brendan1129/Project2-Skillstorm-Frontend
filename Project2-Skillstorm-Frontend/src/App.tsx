@@ -7,14 +7,61 @@ import EditIncomeInformation from "./components/EditIncomeInformation";
 import Results from "./components/Results";
 import { Provider } from "react-redux";
 import store from './store';
+<<<<<<< Updated upstream
+=======
+import React from 'react';
+import { Footer, Grid, Select } from '@trussworks/react-uswds';
+import { useTranslation } from 'react-i18next';
+>>>>>>> Stashed changes
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
-import { useNavigate } from 'react-router-dom'
+
 
 
 export default function App() {
 
   
+<<<<<<< Updated upstream
+=======
+  const { i18n} = useTranslation();
+    
+  const footerPrimary = (
+    <>
+    </>
+  )
+
+  const setLanguage = (v: string) => {
+    i18n.changeLanguage(v);
+  }
+  const footerSecondary = (
+    <>
+    <div style={{bottom: "0px"}}>
+      <Grid row gap>
+        <Grid className="usa-footer__contact-links" mobileLg={{ col: 6 }}>
+        <Select
+          onChange={(e) => setLanguage(e.target.value)}
+          defaultValue={"en"}
+          id="filing-status"
+          name="filing-status"
+        >
+          <React.Fragment key=".0">
+          <option value="en">
+          Select Language{' '}
+          </option>
+          <option value="en">
+          English
+          </option>
+          <option value="sp">
+          Spanish
+          </option>
+          </React.Fragment>
+        </Select>
+        </Grid>
+      </Grid>
+      </div>
+    </>
+  )
+>>>>>>> Stashed changes
 
     return (
       <>

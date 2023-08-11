@@ -12,10 +12,14 @@ const EditAccount = () => {
 
     // hooks in the queries from the API
     const email = String(localStorage.getItem("email"))
-    const {data : user, refetch} = taxApi.useFindUserQuery(email);
+    const {data : user} = taxApi.useFindUserQuery(email);
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();
+<<<<<<< Updated upstream
+=======
+    const {t} = useTranslation();
+>>>>>>> Stashed changes
 
    
     // sets the form to useState so changes can be read

@@ -66,7 +66,8 @@ export type Results = {
     result : number
 }
 
-const jwt = localStorage.getItem("JWT")
+const jwt = String(localStorage.getItem("JWT"))
+const email = String(localStorage.getItem("email"))
 
 
 // create the API calls
@@ -74,26 +75,13 @@ export const taxApi = createApi({
    
     reducerPath : 'taxApi',
     
-    baseQuery : fetchBaseQuery({baseUrl: 'http://localhost:8080/'}),
+    baseQuery : fetchBaseQuery({baseUrl: 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
     endpoints : (builder) => ({
 
         // User endpoints
-        findAuth : builder.mutation<string, Auth>({
-            query : (checkAuth) => {
-                
-                return {
-                    method : 'POST',
-                    url : 'http://localhost:8080/auth/login',
-                    headers : {
-                        "Access-Control-Allow-Origin": "*"
-                    },
-                    body : checkAuth
-                    
-                }
-            }
-        }),
+
         findUser : builder.query<User, string>({
-            query : (email) => {
+            query : () => {
                 return {
                     url: `users/email?email=${email}`,
                     headers: {

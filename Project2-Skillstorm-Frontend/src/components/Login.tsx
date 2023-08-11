@@ -1,8 +1,8 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Button, Fieldset, Form, GovBanner, Grid, GridContainer, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
+import { FunctionComponent,  useRef, useState } from "react";
+import { Button, Fieldset, Form, Grid, GridContainer,  Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput,  } from "@trussworks/react-uswds";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'
-import { Auth, taxApi } from "../api/TaxApi.js";
+import { Auth } from "../api/TaxApi.js";
 
 const Login: FunctionComponent = () => {
 
@@ -11,11 +11,10 @@ const Login: FunctionComponent = () => {
   
 
   // t, i18n for translations
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
-  
-  const [checkAuth] = taxApi.useFindAuthMutation();
+
 
   const [authData, setAuthData] = useState({
     email : "",
@@ -36,7 +35,7 @@ const Login: FunctionComponent = () => {
         role : "USER"
      }
 
-     fetch("http://localhost:8080/auth/login", {
+     fetch("http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/auth/login", {
       headers: {
         "Content-Type": "application/json",
         },
@@ -49,7 +48,8 @@ const Login: FunctionComponent = () => {
       localStorage.setItem("JWT", JSON.stringify((headers.get("authorization"))));
       localStorage.setItem("email", JSON.stringify((body.email)))
       
-    });
+    })
+    .catch(error => console.error(error));
 navigate('/editAcc')
   }
 
@@ -62,14 +62,16 @@ navigate('/editAcc')
         role : "USER"
      }
 
-    fetch("http://localhost:8080/auth/register", {
+    fetch("http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/auth/register", {
       headers: {
         "Content-Type": "application/json",
         },
         method: "post",
         body: JSON.stringify(regAuth),
     })
-    .then();
+    .then()
+    .catch(error => console.error(error));
+    
     navigate(0)
 
   }

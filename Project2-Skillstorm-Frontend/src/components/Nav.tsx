@@ -1,14 +1,22 @@
+<<<<<<< Updated upstream
 import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
 import { FunctionComponent, useEffect, useState } from "react";
 import './i18n.js';
 import { useTranslation } from "react-i18next";
+=======
+import {GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
+import { FunctionComponent, useEffect, useState } from "react";
+import './i18n.js';
+import { useTranslation } from "react-i18next";
+
+>>>>>>> Stashed changes
 
 const Nav: FunctionComponent = () => {
 
     // Mobile expansion hook found in TrussWorks docs
     const [expanded, setExpanded] = useState(false);
     // t, i18n for translations
-    const { t, i18n } = useTranslation();
+    const { t, } = useTranslation();
 
     useEffect(() => {
       // Navigate to the "/home" route when the component is rendered
@@ -28,7 +36,11 @@ const Nav: FunctionComponent = () => {
           <span>Results</span>
         </a>
     ];
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
   
     const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
     

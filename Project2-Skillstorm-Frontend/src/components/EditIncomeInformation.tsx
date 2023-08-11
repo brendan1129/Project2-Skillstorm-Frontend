@@ -19,7 +19,11 @@ function EditIncomeInformation() {
   const [deleteW2] = taxApi.useDeleteFormW2Mutation();
   const thisForm1099s = form1099s;
   const thisFormW2 = formW2;
+<<<<<<< Updated upstream
 
+=======
+  const {t} = useTranslation();
+>>>>>>> Stashed changes
   // useNavigate to change pages/refresh state
   const navigate = useNavigate();
 
