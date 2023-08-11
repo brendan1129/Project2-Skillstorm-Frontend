@@ -200,11 +200,44 @@ const handleSubmit = (event: any) => {
         // Return W2 Form values        
         <div style={{borderBottom:"solid"}}>
             <Label htmlFor='ein'>Employer Identification Number (EIN)</Label>
-            <TextInput onChange={(e) => setFormW2Data({...formW2Data, employerEIN : e.target.value})} id="ein" name="ein" aria-describedby='einHint' type="text"></TextInput>
+            <TextInput onChange={(e) => setFormW2Data({...formW2Data, employerEIN : e.target.value})} 
+            id="ein" 
+            name="ein" 
+            aria-describedby='einHint' 
+            type="text"
+            pattern="^[0-9]{2}-[0-9]{7}$"
+              onBlur={(e) => {
+                const ein = e.target.value;
+                if (!ein.match(/^[0-9]{2}-[0-9]{7}$/)) {
+                alert("Please enter an EIN in the format XX-XXXXXX");
+                }
+            }}>
+            
+            </TextInput>
             <Label htmlFor='w2-amount-earned'>Amount Earned</Label>
-            <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountEarned : parseInt(e.target.value)})} id="w2-amount-earned" name="w2-amount-earned" type="text"></TextInput>
+            <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountEarned : parseInt(e.target.value)})} 
+            id="w2-amount-earned" 
+            name="w2-amount-earned" 
+            type="text"
+            pattern="^((1000000000)|([0-9]{1,9}))$"
+              onBlur={(e) => {
+                const earned = e.target.value;
+                if (!earned.match(/^((1000000000)|([0-9]{1,9}))$/)) {
+                  alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
+                }
+              }}></TextInput>
             <Label htmlFor='w2-amount-withheld'>Amount Withheld</Label>
-            <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountWithheld : parseInt(e.target.value)})} id="w2-amount-withheld" name="w2-amount-withheld" type="text"></TextInput>
+            <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountWithheld : parseInt(e.target.value)})} 
+            id="w2-amount-withheld" 
+            name="w2-amount-withheld" 
+            type="text"
+            pattern="^((1000000000)|([0-9]{1,9}))$"
+            onBlur={(e) => {
+              const withheld = e.target.value;
+              if (!withheld.match(/^((1000000000)|([0-9]{1,9}))$/)) {
+                alert("The amount entered in the withheld field must be between 0 and 1,000,000,000");
+              }
+            }}></TextInput>
             <legend className="usa-legend usa-legend"><b>Employer Information</b></legend>
             <Label htmlFor='w2-employer-name'>Employer Name</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, employerName : e.target.value})} id="w2-employer-name" name="w2-employer-name" type="text"></TextInput> 
@@ -216,7 +249,17 @@ const handleSubmit = (event: any) => {
             <Label className="usa-label" htmlFor="w2-employer-city">City</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, city : e.target.value})} id="w2-employer-city" name="w2-employer-city" type="text"></TextInput>
             <Label className="usa-label" htmlFor="w2-employer-state">State</Label>
-            <TextInput onChange={(e) => setFormW2Data({...formW2Data, state : e.target.value})} id="w2-employer-state" name="w2-employer-state" type="text"></TextInput>
+            <TextInput onChange={(e) => setFormW2Data({...formW2Data, state : e.target.value})} 
+            id="w2-employer-state" 
+            name="w2-employer-state" 
+            type="text"
+            pattern="^[A-Z]{2}$"
+            onBlur={(e) => {
+                const state = e.target.value;
+                if(!state.match(/^[A-Z]{2}$/)) {
+                    alert("Please enter a valid business state abbreviation");
+                }
+            }}></TextInput>
             <Label className="usa-label" htmlFor="w2-employer-zip">Zip Code</Label>      
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, zipCode : parseInt(e.target.value)})} id="w2-employer-zip" name="w2-employer-zip" type="text"></TextInput>
             <Button className="usa-button--accent-cool" style={{marginBottom:"25px"}} onClick={handleNewW2Submit}type="button"> Submit Form </Button>   
@@ -227,11 +270,42 @@ const handleSubmit = (event: any) => {
         // Render 1099 Form Values
         <div style={{borderBottom:"solid"}}>
             <Label htmlFor='tin'>Payer's TIN</Label>
-            <TextInput onChange={(e) => setForm1099Data({...form1099Data, payerTIN : e.target.value})} id="tin" name="tin" aria-describedby='tinHint' type="text"></TextInput>
+            <TextInput onChange={(e) => setForm1099Data({...form1099Data, payerTIN : e.target.value})} 
+            id="tin" 
+            name="tin" 
+            aria-describedby='tinHint' 
+            type="text"
+            pattern="^9[0-9]{2}-[0-9]{2}-[0-9]{4}$"
+            onBlur={(e) => {
+                const tin = e.target.value;
+                if(!tin.match(/^9[0-9]{2}-[0-9]{2}-[0-9]{4}$/)) {
+                  alert("Please enter a TIN that begins with 9 in the format XXX-XX-XXXX");
+                }
+            }}></TextInput>
             <Label htmlFor='1099-amount-earned'>Amount Earned</Label>
-            <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountEarned : parseInt(e.target.value)})} id="1099-amount-earned" name="1099-amount-earned" type="text"></TextInput>
+            <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountEarned : parseInt(e.target.value)})} 
+            id="1099-amount-earned" 
+            name="1099-amount-earned" 
+            type="text"
+            pattern="^((1000000000)|([0-9]{1,9}))$"
+            onBlur={(e) => {
+              const earned = e.target.value;
+              if (!earned.match(/^((1000000000)|([0-9]{1,9}))$/)) {
+                alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
+              }
+            }}></TextInput>
             <Label htmlFor='1099-amount-withheld'>Amount Withheld</Label>
-            <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountWithheld : parseInt(e.target.value)})} id="1099-amount-withheld" name="1099-amount-withheld" type="text"></TextInput>
+            <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountWithheld : parseInt(e.target.value)})} 
+            id="1099-amount-withheld" 
+            name="1099-amount-withheld" 
+            type="text"
+            pattern="^((1000000000)|([0-9]{1,9}))$"
+            onBlur={(e) => {
+              const withheld = e.target.value;
+              if (!withheld.match(/^((1000000000)|([0-9]{1,9}))$/)) {
+                alert("The amount entered in the withheld field must be between 0 and 1,000,000,000");
+              }
+            }}></TextInput>
             <legend className="usa-legend usa-legend"><b>Employer Information</b></legend>
             <Label htmlFor='1099-employer'>Employer Name</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, businessName : e.target.value})} id="1099-employer" name="1099-employer" type="text"></TextInput>
@@ -243,7 +317,16 @@ const handleSubmit = (event: any) => {
             <Label className="usa-label" htmlFor="1099-employer-city">City</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, city : e.target.value})} id="1099-employer-city" name="1099-employer-city" type="text"></TextInput>
             <Label className="usa-label" htmlFor="1099-employer-state">State</Label>
-            <TextInput onChange={(e) => setForm1099Data({...form1099Data, state : e.target.value})} id="1099-employer-state" name="1099-employer-state" type="text"></TextInput>
+            <TextInput onChange={(e) => setForm1099Data({...form1099Data, state : e.target.value})} 
+            id="1099-employer-state" 
+            name="1099-employer-state" 
+            type="text"
+            onBlur={(e) => {
+              const state = e.target.value;
+              if(!state.match(/^[A-Z]{2}$/)) {
+                  alert("Please enter a valid employer state abbreviation");
+              }
+            }}></TextInput>
             <Label className="usa-label" htmlFor="1099-employer-zip">Zip Code</Label>      
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, zipCode : parseInt(e.target.value)})} id="1099-employer-zip" name="1099-employer-zip" type="text"></TextInput>                     
             <Button className="usa-button--accent-cool" style={{marginBottom:"25px"}} onClick={handleNew1099Submit}type="button"> Submit Form </Button>
