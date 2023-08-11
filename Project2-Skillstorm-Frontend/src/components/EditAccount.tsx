@@ -11,7 +11,8 @@ import { useTranslation } from "react-i18next";
 
 const EditAccount = () => {
     // hooks in the queries from the API
-    const {data : user, refetch} = taxApi.useFindUserQuery("jkersey9@gmail.com");
+    const email = String(localStorage.getItem("email"))
+    const {data : user, refetch} = taxApi.useFindUserQuery(email);
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();

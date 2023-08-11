@@ -14,7 +14,7 @@ const Nav: FunctionComponent = () => {
     useEffect(() => {
       // Navigate to the "/home" route when the component is rendered
     }, []);
-    
+
     const items = [
         <a href="/home" key="one" className="usa-nav__link">
           <span>{t("Nav.Home")}</span>

@@ -1,43 +1,80 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { Button, Fieldset, Form, GovBanner, Grid, GridContainer, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
 import { useTranslation } from 'react-i18next';
-import './i18n.js';
-import React from "react";
+import { useNavigate } from 'react-router-dom'
+import { Auth, taxApi } from "../api/TaxApi.js";
 
 const Login: FunctionComponent = () => {
 
+  
+
+  
+
   // t, i18n for translations
   const { t, i18n } = useTranslation();
-  // useState for hiding password
+
+  const navigate = useNavigate();
+  
+  const [checkAuth] = taxApi.useFindAuthMutation();
+
+  const [authData, setAuthData] = useState({
+    email : "",
+    password : ""
+  })
+
   const [showPassword, setShowPassword] = useState(false);
 
   // Registration Modal
   const modalRef = useRef<ModalRef>(null);
 
-  const handleRegistry = () => {
-    // TODO: Register User
-  };
+  const handleLogin = (event: any) => {
+    event.preventDefault();
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    // Set user in localStorage, temporary
+     const newAuth : Auth = {
+        email : String(authData.email),
+        password : String(authData.password),
+        role : "USER"
+     }
 
-    localStorage.setItem('user', 'username');
-  };
+     fetch("http://localhost:8080/auth/login", {
+      headers: {
+        "Content-Type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify(newAuth),
+    })
+    .then((response) => Promise.all([response.json(), response.headers]))
+    .then(([body, headers]) => {
 
+      localStorage.setItem("JWT", JSON.stringify((headers.get("authorization"))));
+      localStorage.setItem("email", JSON.stringify((body.email)))
+      
+    });
+navigate('/editAcc')
+  }
+
+  const handleRegistry = (event: any) => {
+    event.preventDefault();
+
+     const regAuth : Auth = {
+        email : String(authData.email),
+        password : String(authData.password),
+        role : "USER"
+     }
+
+    fetch("http://localhost:8080/auth/register", {
+      headers: {
+        "Content-Type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify(regAuth),
+    })
+    .then();
+    navigate(0)
+
+  }
   return (
   <>
-
-        <GovBanner />
-        <Header extended>
-        <div className="usa-nav-container">
-          <div className="usa-navbar" >
-            
-            <Title>
-              <a href="/home" title="Home" aria-label="Home">{t("Login.Title")}</a>
-            </Title>
-          </div>
-        </div>
-        </Header>
         <main id="main-content">
         <div className="bg-base-lightest">
         <GridContainer className="usa-section">
@@ -48,9 +85,9 @@ const Login: FunctionComponent = () => {
                 <legend className="usa-legend usa-legend--large" style={{paddingTop: "10%", paddingBottom: "10%", paddingLeft: "0%", textAlign: "center"}}>{t('Login.Enter Login Info')}</legend>
               </Fieldset>
               <Label className="usa-label" htmlFor="username">Email</Label>
-              <TextInput id="username" name="username" type='email'></TextInput>
+              <TextInput onChange={(e) => setAuthData({...authData, email : e.target.value})} id="username" name="username" type='email'></TextInput>
               <Label className="usa-label" htmlFor="password">{t("Login.Password")}</Label>
-              <TextInput id="password" name="password" type={showPassword ? 'text' : 'password'}></TextInput>
+              <TextInput onChange={(e) => setAuthData({...authData, password : e.target.value})} id="password" name="password" type={showPassword ? 'text' : 'password'}></TextInput>
               <a
                           title="Show password"
                           href="javascript:void(0);"
@@ -75,14 +112,12 @@ const Login: FunctionComponent = () => {
                   </ModalHeading>
                   <div className="usa-prose">
                       <Form onSubmit={handleRegistry}>
-                      <Label className="usa-label" htmlFor="new-name">{t("Login.Full Name")}</Label>
-                      <TextInput id="new-name" name="new-name" type="text"></TextInput>
                       <Label className="usa-label" htmlFor="new-username">{t("Login.Email")}</Label>
-                      <TextInput id="new-username" name="new-username" type="text"></TextInput>
+                      <TextInput onChange={(e) => setAuthData({...authData, email : e.target.value})} id="new-username" name="new-username" type="text"></TextInput>
                       <Label className="usa-label" htmlFor="new-password">{t("Login.Password")}</Label>
                       <TextInput id="new-password" name="new-password" type="password"></TextInput>
                       <Label className="usa-label" htmlFor="new-password-2">{t("Login.Retype")}</Label>
-                      <TextInput id="new-password-2" name="new-password-2" type="password"></TextInput>
+                      <TextInput onChange={(e) => setAuthData({...authData, password : e.target.value})} id="new-password-2" name="new-password-2" type="password"></TextInput>
                       <Button type="submit" size="big" style={{margin:"60px"}}>{t("Login.Create")}</Button>
                       </Form>
                   </div>

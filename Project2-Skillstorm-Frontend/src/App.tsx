@@ -1,12 +1,8 @@
-
 import './App.css';
 import '../node_modules/@trussworks/react-uswds/lib/uswds.css';
-//import Login from "./components/Login";
-//import { useEffect, useState } from 'react';
 import Nav from './components/Nav';
 import EditAccount from './components/EditAccount';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
 import EditIncomeInformation from "./components/EditIncomeInformation";
 import Results from "./components/Results";
 import { Provider } from "react-redux";
@@ -14,30 +10,16 @@ import store from './store';
 import React from 'react';
 import { Footer, FooterNav, Grid, Select } from '@trussworks/react-uswds';
 import { useTranslation } from 'react-i18next';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
+import { useNavigate } from 'react-router-dom'
+
 
 export default function App() {
 
   
   const {t, i18n} = useTranslation();
-    //creating data from our queries
     
-    //const {data : form1099, refetch} = taxApi.useFindForm1099Query();
-    //const {data : formW2, refetch} = taxApi.useFindFormW2Query();
-    //const {data : results, refetch} = taxApi.useFindResultsQuery();
-
-  //const [loggedIn, setLoggedIn] = useState(false);
-
-  /*useEffect(() => {
-    // Check if there's a user in localStorage
-    const user = localStorage.getItem('user');
-    if (!user) {
-      // no user found
-      setLoggedIn(false);
-    }
-    else {
-      setLoggedIn(true);
-    }
-  }, []); */
   const footerPrimary = (
     <>
     </>
@@ -81,10 +63,10 @@ export default function App() {
       <Router>
         <Nav />
             <Routes>
-              <Route path="/home" element ={<Home/>}/>
-              <Route path="/editAcc" element ={<EditAccount/>} />
-              <Route path="/editTax" element ={<EditIncomeInformation/>} />
-              <Route path="/results" element ={<Results/>} />
+              <Route path="/home" element ={<Login/>}/>
+              <Route path="/editAcc" element ={<PrivateRoute><EditAccount/></PrivateRoute>} />
+              <Route path="/editTax" element ={<PrivateRoute><EditIncomeInformation/></PrivateRoute>} />
+              <Route path="/results" element ={<PrivateRoute><Results/></PrivateRoute>} />
             </Routes>
           </Router>
           </Provider>
