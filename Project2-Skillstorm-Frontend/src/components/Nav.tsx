@@ -8,7 +8,7 @@ const Nav: FunctionComponent = () => {
     // Mobile expansion hook found in TrussWorks docs
     const [expanded, setExpanded] = useState(false);
     // t, i18n for translations
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     useEffect(() => {
       // Navigate to the "/home" route when the component is rendered

@@ -1,21 +1,14 @@
 import { Fieldset, Form, Grid, GridContainer, Label, TextInput, Button } from "@trussworks/react-uswds";
 import { taxApi } from "../api/TaxApi";
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
 function Results() {
 
-    const {data : results, refetch} = taxApi.useFindResultsQuery("jkersey9@gmail.com")
+    const {data : results} = taxApi.useFindResultsQuery("jkersey9@gmail.com")
     const thisResults = results;
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        year: "2022",
-        earned: thisResults?.earned,
-        withheld: thisResults?.withheld,
-        result: thisResults?.result
-    })
 
     const handleSubmit = (event: any) => {
         event.preventDefault();

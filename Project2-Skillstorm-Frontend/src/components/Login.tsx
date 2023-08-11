@@ -1,13 +1,13 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
 import { Button, Fieldset, Form, GovBanner, Grid, GridContainer, Header, Label, Modal, ModalHeading, ModalRef, ModalToggleButton, TextInput, Title } from "@trussworks/react-uswds";
 import { useTranslation } from 'react-i18next';
 import './i18n.js';
-import React from "react";
+
 
 const Login: FunctionComponent = () => {
 
   // t, i18n for translations
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
   // useState for hiding password
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,11 +18,9 @@ const Login: FunctionComponent = () => {
     // TODO: Register User
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    // Set user in localStorage, temporary
-
-    localStorage.setItem('user', 'username');
-  };
+  function handleLogin () {
+    
+  }
 
   return (
   <>

@@ -1,10 +1,10 @@
-import { Button, Table, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert } from '@trussworks/react-uswds';
+import { Button, Table, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput} from '@trussworks/react-uswds';
 import './Component.css'
 import '/node_modules/@trussworks/react-uswds/lib/uswds.css';
 import React, { useState } from 'react';
 import { taxApi, Form1099, FormW2 } from '../api/TaxApi';
 import { useNavigate } from 'react-router-dom'
-import { render, cleanup } from '@testing-library/react'
+
 
 
 function EditIncomeInformation() {
@@ -87,19 +87,9 @@ function EditIncomeInformation() {
     console.log(newForm1099)
     create1099(newForm1099)
         .unwrap()
-        .then( () => {
-            // shows Success alert
-           render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
-           
-           // refreshes the state after 1.5 seconds
-           navigate(0)
-           window.setTimeout(() => {
-            cleanup()
-           }, 1500)
-           
-
-      })
+        .then() 
         .catch(error => console.error(error))
+        navigate(0)
 }
 
 // adds a new formW2 to the database
@@ -126,19 +116,9 @@ const handleNewW2Submit = (event: any) => {
   console.log(newFormW2)
   createW2(newFormW2)
       .unwrap()
-      .then( () => {
-          // shows Success alert
-         render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
-         
-         // refreshes the state after 1.5 seconds
-         navigate(0)
-         window.setTimeout(() => {
-          cleanup()
-         }, 1500)
-         
-
-    })
+      .then()
       .catch(error => console.error(error))
+      navigate(0)
 }
 
 // moves to the results page
@@ -204,28 +184,14 @@ const handleSubmit = (event: any) => {
             id="ein" 
             name="ein" 
             aria-describedby='einHint' 
-            type="text"
-            pattern="^[0-9]{2}-[0-9]{7}$"
-              onBlur={(e) => {
-                const ein = e.target.value;
-                if (!ein.match(/^[0-9]{2}-[0-9]{7}$/)) {
-                alert("Please enter an EIN in the format XX-XXXXXX");
-                }
-            }}>
+            type="text">
             
             </TextInput>
             <Label htmlFor='w2-amount-earned'>Amount Earned</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountEarned : parseInt(e.target.value)})} 
             id="w2-amount-earned" 
             name="w2-amount-earned" 
-            type="text"
-            pattern="^((1000000000)|([0-9]{1,9}))$"
-              onBlur={(e) => {
-                const earned = e.target.value;
-                if (!earned.match(/^((1000000000)|([0-9]{1,9}))$/)) {
-                  alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
-                }
-              }}></TextInput>
+            type="text"></TextInput>
             <Label htmlFor='w2-amount-withheld'>Amount Withheld</Label>
             <TextInput onChange={(e) => setFormW2Data({...formW2Data, amountWithheld : parseInt(e.target.value)})} 
             id="w2-amount-withheld" 
@@ -274,26 +240,14 @@ const handleSubmit = (event: any) => {
             id="tin" 
             name="tin" 
             aria-describedby='tinHint' 
-            type="text"
-            pattern="^9[0-9]{2}-[0-9]{2}-[0-9]{4}$"
-            onBlur={(e) => {
-                const tin = e.target.value;
-                if(!tin.match(/^9[0-9]{2}-[0-9]{2}-[0-9]{4}$/)) {
-                  alert("Please enter a TIN that begins with 9 in the format XXX-XX-XXXX");
-                }
-            }}></TextInput>
+            type="text"></TextInput>
             <Label htmlFor='1099-amount-earned'>Amount Earned</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountEarned : parseInt(e.target.value)})} 
             id="1099-amount-earned" 
             name="1099-amount-earned" 
             type="text"
             pattern="^((1000000000)|([0-9]{1,9}))$"
-            onBlur={(e) => {
-              const earned = e.target.value;
-              if (!earned.match(/^((1000000000)|([0-9]{1,9}))$/)) {
-                alert("The amount entered in the earned field must be between 0 and 1,000,000,000");
-              }
-            }}></TextInput>
+            ></TextInput>
             <Label htmlFor='1099-amount-withheld'>Amount Withheld</Label>
             <TextInput onChange={(e) => setForm1099Data({...form1099Data, amountWithheld : parseInt(e.target.value)})} 
             id="1099-amount-withheld" 

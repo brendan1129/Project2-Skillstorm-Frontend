@@ -1,17 +1,16 @@
-import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert} from "@trussworks/react-uswds";
+import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput} from "@trussworks/react-uswds";
 import React from "react";
 import { taxApi, User } from "../api/TaxApi";
 import { useState } from 'react'
 import moment from "moment";
 import { useNavigate } from 'react-router-dom'
-import { render, cleanup } from '@testing-library/react'
 
 
 
 const EditAccount = () => {
 
     // hooks in the queries from the API
-    const {data : user, refetch} = taxApi.useFindUserQuery("jkersey9@gmail.com");
+    const {data : user} = taxApi.useFindUserQuery("jkersey9@gmail.com");
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();
@@ -104,13 +103,9 @@ const EditAccount = () => {
             .unwrap()
             .then( () => {
                 // shows Success alert
-               render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
                
-               // transitions to the editTax page after 1.5 seconds
-               window.setTimeout(() => {
-                cleanup()
                 navigate('/editTax')
-               }, 1500)
+              
                
 
           })
@@ -179,14 +174,7 @@ const EditAccount = () => {
                                 name="ssn" 
                                 aria-describedby="nameHint" 
                                 type="text" 
-                                defaultValue={thisUser?.ssn}
-                                pattern="^[0-9]{3}-[0-9]{2}-[0-9]{4}$"
-                                onBlur={(e) => {
-                                    const ssn = e.target.value;
-                                    if (!ssn.match(/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/)) {
-                                    alert("Please enter a valid SSN.");
-                                    }
-                                 }}>
+                                defaultValue={thisUser?.ssn}>
                                 </TextInput>
                                 <legend className="usa-legend usa-legend"><b>Address</b></legend>
                                 <Label  className="usa-label" htmlFor="street-primary">Street Primary</Label>
