@@ -134,9 +134,33 @@ const EditAccount = () => {
                                 <legend className="usa-legend usa-legend--large">Edit Account Information</legend>
                                 <legend className="usa-legend usa-legend"><b>General</b></legend>
                                 <Label className="usa-label" htmlFor="first-name">First Name</Label>
-                                <TextInput onChange={(e) => setFormData({...formData, firstName : e.target.value})} id="first-name" name="first-name" aria-describedby="nameHint" type="text" defaultValue={thisUser?.firstName}></TextInput>
+                                <TextInput onChange={(e) => setFormData({...formData, firstName : e.target.value})}
+                                 id="first-name" 
+                                 name="first-name" 
+                                 aria-describedby="nameHint" 
+                                 type="text" 
+                                 defaultValue={thisUser?.firstName}
+                                 pattern="^[a-zA-Z]+$"
+                                 onBlur={(e) => {
+                                    const name = e.target.value;
+                                    if (!name.match(/^[a-zA-Z]+$/)) {
+                                    alert("Please enter a valid first name.");
+                                    }
+                                }}></TextInput>
                                 <Label className="usa-label" htmlFor="last-name">Last Name</Label>
-                                <TextInput onChange={(e) => setFormData({...formData, lastName : e.target.value})} id="last-name" name="last-name" aria-describedby="nameHint" type="text" defaultValue={thisUser?.lastName}></TextInput>
+                                <TextInput onChange={(e) => setFormData({...formData, lastName : e.target.value})}
+                                id="last-name"
+                                name="last-name"
+                                aria-describedby="nameHint" 
+                                type="text" 
+                                defaultValue={thisUser?.lastName}
+                                pattern="^[a-zA-Z]+$"
+                                onBlur={(e) => {
+                                   const name = e.target.value;
+                                   if (!name.match(/^[a-zA-Z]+$/)) {
+                                   alert("Please enter a valid last name.");
+                                   }
+                                }}></TextInput>
                                 <Label className="usa-label" htmlFor="email">E-mail</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, email : e.target.value})} id="email" name="email" aria-describedby="nameHint" type="text" defaultValue={thisUser?.email} disabled={true}></TextInput>
                                 <Label htmlFor='dob-date' id='dob-date-label'>Date of Birth</Label>
@@ -150,7 +174,20 @@ const EditAccount = () => {
                                     name="dob-date"
                                 />
                                 <Label className="usa-label" htmlFor="ssn">Social Security Number</Label>
-                                <TextInput onChange={(e) => setFormData({...formData, ssn : e.target.value})} id="ssn" name="ssn" aria-describedby="nameHint" type="text" defaultValue={thisUser?.ssn}></TextInput>
+                                <TextInput onChange={(e) => setFormData({...formData, ssn : e.target.value})} 
+                                id="ssn" 
+                                name="ssn" 
+                                aria-describedby="nameHint" 
+                                type="text" 
+                                defaultValue={thisUser?.ssn}
+                                pattern="^[0-9]{3}-[0-9]{2}-[0-9]{4}$"
+                                onBlur={(e) => {
+                                    const ssn = e.target.value;
+                                    if (!ssn.match(/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/)) {
+                                    alert("Please enter a valid SSN.");
+                                    }
+                                 }}>
+                                </TextInput>
                                 <legend className="usa-legend usa-legend"><b>Address</b></legend>
                                 <Label  className="usa-label" htmlFor="street-primary">Street Primary</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, streetPrimary : e.target.value})} id="street-primary" name="street-primary" type="text" defaultValue={thisUser?.address.streetPrimary}></TextInput>
@@ -159,7 +196,18 @@ const EditAccount = () => {
                                 <Label className="usa-label" htmlFor="city">City</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, city : e.target.value})} id="city" name="city" type="text" defaultValue={thisUser?.address.city}></TextInput>
                                 <Label className="usa-label" htmlFor="state">State</Label>
-                                <TextInput onChange={(e) => setFormData({...formData, state : e.target.value})} id="state" name="state" type="text" defaultValue={thisUser?.address.state}></TextInput>
+                                <TextInput onChange={(e) => setFormData({...formData, state : e.target.value})} 
+                                id="state" 
+                                name="state" 
+                                type="text" 
+                                defaultValue={thisUser?.address.state}
+                                pattern="^[A-Z]{2}$"
+                                onBlur={(e) => {
+                                    const state = e.target.value;
+                                    if(!state.match(/^[A-Z]{2}$/)) {
+                                        alert("Please enter a valid state abbreviation");
+                                    }
+                                }}></TextInput>
                                 <Label className="usa-label" htmlFor="zip">Zip Code</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, zipCode : parseInt(e.target.value)})} id="zip" name="zip" type="text" defaultValue={thisUser?.address.zipCode}></TextInput>
                                 <Label htmlFor='filing-status'>Filing Status</Label>
