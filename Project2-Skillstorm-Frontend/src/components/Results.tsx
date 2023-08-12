@@ -1,6 +1,7 @@
 import { Fieldset, Form, Grid, GridContainer, Label, TextInput, Button } from "@trussworks/react-uswds";
 import { taxApi } from "../api/TaxApi";
 import { useNavigate } from 'react-router-dom'
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 
@@ -10,7 +11,7 @@ function Results() {
     const {data : results} = taxApi.useFindResultsQuery(email)
     const thisResults = results;
     const navigate = useNavigate();
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
 
 
     const handleSubmit = (event: any) => {
@@ -24,7 +25,7 @@ function Results() {
             if (thisResults.result > 0) {
                 return (
                     <>
-                        <Label className="usa-label" htmlFor="result">Taxes Owed to the IRS</Label>
+                        <Label className="usa-label" htmlFor="result">{t("Results.Taxes Owed to the IRS")}</Label>
                         <TextInput id="result" name="result" aria-describedby="nameHint" type="text" value={"$" + round(thisResults?.result, 2)} disabled={true}></TextInput>
                     </>
                 )
@@ -34,7 +35,7 @@ function Results() {
                 return(
                     <>
 
-                    <Label className="usa-label" htmlFor="result">Tax Refund</Label>
+                    <Label className="usa-label" htmlFor="result">{t("Results.Tax Refund")}</Label>
                     <TextInput id="result" name="result" aria-describedby="nameHint" type="text" value={"$" + refund} disabled={true}></TextInput>
                     </>
                 )
@@ -56,16 +57,14 @@ function Results() {
                         <div className= "bg-white padding-y-3 padding-x-5 border border-base-lighter">
                             <Form onSubmit={handleSubmit} className= "usa-form usa-form--large margin-bottom-3">
                             <Fieldset className="usa-fieldset">
-                                <legend className="usa-legend usa-legend--large">Tax Results</legend>
-                                <legend className="usa-legend usa-legend"><b>Filing Year 2022</b></legend>
-                                <Label className="usa-label" htmlFor="total-earned">Total Earned</Label>
+                                <legend className="usa-legend usa-legend--large">{t("Results.Tax Results")}</legend>
+                                <legend className="usa-legend usa-legend"><b>{t("Results.Filing Year 2022")}</b></legend>
+                                <Label className="usa-label" htmlFor="total-earned">{t("Results.Total Earned")}</Label>
                                 <TextInput id="total-earned" name="total-earned" aria-describedby="nameHint" type="text" value={"$" + thisResults?.earned} disabled={true}></TextInput>
-                                <Label className="usa-label" htmlFor="total-withheld">Total Withheld</Label>
+                                <Label className="usa-label" htmlFor="total-withheld">{t("Results.Total Withheld")}</Label>
                                 <TextInput id="total-withheld" name="total-withheld" aria-describedby="nameHint" type="text" value={"$" + thisResults?.withheld} disabled={true}></TextInput>
                                 {checkRefund()}
-                                <Button className="usa-button" accentStyle='warm' type="submit" style={{position:"relative", left:"32%"}} base> Back </Button>
-                                
-                                
+                                <Button className="usa-button" accentStyle='warm' type="submit" style={{position:"relative", left:"32%"}} base> {t("Results.Back")} </Button>
                             </Fieldset>
                             </Form>
                         </div>

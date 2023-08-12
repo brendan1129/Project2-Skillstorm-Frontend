@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild/darwin-x64": "^0.19.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@trussworks/react-uswds": "^5.1.1",
     "http-proxy-middleware": "^2.0.6",
