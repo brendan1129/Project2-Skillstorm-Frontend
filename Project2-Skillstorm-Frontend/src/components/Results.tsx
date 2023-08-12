@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 function Results() {
 
-    const email = String(localStorage.getItem("email"))
+    const email = String(localStorage.getItem("email")).replace(/\"/g, "")
     const {data : results} = taxApi.useFindResultsQuery(email)
     const thisResults = results;
     const navigate = useNavigate();

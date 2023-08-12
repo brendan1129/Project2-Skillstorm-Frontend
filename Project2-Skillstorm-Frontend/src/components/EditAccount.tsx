@@ -105,10 +105,6 @@ const EditAccount = () => {
         updateUser(updatedUser)
             .unwrap()
             .then( () => {
-                // shows Success alert
-               
-               
-               // transitions to the editTax page after 1.5 seconds
                window.setTimeout(() => {
                 navigate('/editTax')
                }, 1000)
@@ -181,18 +177,13 @@ const EditAccount = () => {
                                 aria-describedby="nameHint" 
                                 type="text" 
                                 defaultValue={thisUser?.ssn}
-                                pattern="^[0-9]{3}-[0-9]{2}-[0-9]{4}$"
-                                onBlur={(e) => {
-                                    const ssn = e.target.value;
-                                    if (!ssn.match(/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/)) {
-                                    alert(t("EditAccount.Please enter a valid SSN"));
-                                    }
-                                 }}>
+                                
+                                 >
                                 </TextInput>
                                 <legend className="usa-legend usa-legend"><b>{t('EditAccount.Address')}</b></legend>
                                 <Label  className="usa-label" htmlFor="street-primary">{t('EditAccount.Street Primary')}</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, streetPrimary : e.target.value})} id="street-primary" name="street-primary" type="text" defaultValue={thisUser?.address.streetPrimary}></TextInput>
-                                <Label className="usa-label" htmlFor="street-secondary">{t('EditAccount.Street Primary')}</Label>
+                                <Label className="usa-label" htmlFor="street-secondary">{t('EditAccount.Street Secondary')}</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, streetSecondary : e.target.value})} id="street-secondary" name="street-secondary" type="text" defaultValue={thisUser?.address?.streetSecondary || ''}></TextInput>
                                 <Label className="usa-label" htmlFor="city">{t('EditAccount.City')}</Label>
                                 <TextInput onChange={(e) => setFormData({...formData, city : e.target.value})} id="city" name="city" type="text" defaultValue={thisUser?.address.city}></TextInput>

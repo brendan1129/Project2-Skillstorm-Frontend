@@ -73,9 +73,7 @@ const Login: FunctionComponent = () => {
        }, 1500)
 
     })
-    .catch(() => 
-      alert("Incorrect Email/Password")
-    )
+    .catch(error => console.error(error))
   }
 
   const handleRegistry = (event: any) => {
@@ -85,6 +83,10 @@ const Login: FunctionComponent = () => {
         email : String(authData.email),
         password : String(authData.password),
         role : "USER"
+     }
+
+     if (String(userData.maritalStatus) === "") {
+      userData.maritalStatus = "SINGLE"
      }
 
      const newUser : User = {
@@ -123,7 +125,7 @@ const Login: FunctionComponent = () => {
     })
     .catch(error => console.error(error));
     })
-    .catch( () => {alert("Account already exists")});
+    .catch( error => console.error(error));
     
     
 
