@@ -1,10 +1,9 @@
-import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput, Alert} from "@trussworks/react-uswds";
+import { Button, DatePicker, Fieldset, Form, Grid, GridContainer, Label, Select, TextInput} from "@trussworks/react-uswds";
 import React from "react";
 import { taxApi, User } from "../api/TaxApi";
 import { useState } from 'react'
 import moment from "moment";
 import { useNavigate } from 'react-router-dom'
-import { render, cleanup } from '@testing-library/react'
 import { useTranslation } from "react-i18next";
 
 
@@ -16,7 +15,7 @@ const EditAccount = () => {
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
    

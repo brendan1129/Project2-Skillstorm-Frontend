@@ -56,7 +56,7 @@ const Login: FunctionComponent = () => {
         role : "USER"
      }
 
-     fetch("http://localhost:8080/auth/login", {
+     fetch("http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/auth/login", {
       headers: {
         "Content-Type": "application/json",
         },
@@ -103,7 +103,7 @@ const Login: FunctionComponent = () => {
       maritalStatus : String(userData.maritalStatus)
      }
 
-    fetch("http://localhost:8080/auth/register", {
+    fetch("http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/auth/register", {
       headers: {
         "Content-Type": "application/json",
         },
@@ -111,7 +111,7 @@ const Login: FunctionComponent = () => {
         body: JSON.stringify(regAuth),
     })
     .then(() => {
-      fetch("http://localhost:8080/users/new", {
+      fetch("http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/users/new", {
       headers: {
         "Content-Type": "application/json",
         },

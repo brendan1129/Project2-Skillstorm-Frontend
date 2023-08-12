@@ -1,8 +1,7 @@
-import { Address, Footer, FooterNav, GovBanner, Grid, Header, Logo, PrimaryNav, SocialLinks, Title } from "@trussworks/react-uswds";
+import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
 import { FunctionComponent, useEffect, useState } from "react";
 import './i18n.js';
 import { useTranslation } from "react-i18next";
-import React from "react";
 
 
 const Nav: FunctionComponent = () => {
@@ -30,20 +29,7 @@ const Nav: FunctionComponent = () => {
           <span>{t("Nav.Results")}</span>
         </a>
     ];
-    const footerPrimary = (
-      <></>
-    )
-  
-    const footerSecondary = (
-      <>
-      <div style={{bottom: "0px"}}>
-        <Grid row gap>
-          <Grid className="usa-footer__contact-links" mobileLg={{ col: 6 }}>
-          </Grid>
-        </Grid>
-        </div>
-      </>
-    )
+    
   
     const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
     

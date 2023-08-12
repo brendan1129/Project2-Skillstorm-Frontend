@@ -1,7 +1,7 @@
 import { Fieldset, Form, Grid, GridContainer, Label, TextInput, Button } from "@trussworks/react-uswds";
 import { taxApi } from "../api/TaxApi";
 import { useNavigate } from 'react-router-dom'
-import React from "react";
+
 import { useTranslation } from "react-i18next";
 
 
@@ -11,7 +11,7 @@ function Results() {
     const {data : results} = taxApi.useFindResultsQuery(email)
     const thisResults = results;
     const navigate = useNavigate();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
     const handleSubmit = (event: any) => {

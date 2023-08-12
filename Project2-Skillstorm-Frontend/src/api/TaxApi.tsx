@@ -75,7 +75,7 @@ export const taxApi = createApi({
    
     reducerPath : 'taxApi',
     
-    baseQuery : fetchBaseQuery({baseUrl: 'http://localhost:8080/'}),
+    baseQuery : fetchBaseQuery({baseUrl: 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
     endpoints : (builder) => ({
 
         // User endpoints

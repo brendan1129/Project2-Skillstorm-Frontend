@@ -8,7 +8,7 @@ import Results from "./components/Results";
 import { Provider } from "react-redux";
 import store from './store';
 import React from 'react';
-import { Footer, FooterNav, Grid, Select } from '@trussworks/react-uswds';
+import { Footer, Grid, Select } from '@trussworks/react-uswds';
 import { useTranslation } from 'react-i18next';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
@@ -18,7 +18,7 @@ import PrivateRoute from './components/PrivateRoute';
 export default function App() {
 
   
-  const {t, i18n} = useTranslation();
+  const {i18n} = useTranslation();
     
   const footerPrimary = (
     <>

@@ -2,7 +2,7 @@
   "name": "project2-skillstorm-frontend",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:8080/",
+  "proxy": "http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/",
   "type": "module",
   "scripts": {
     "dev": "vite",
