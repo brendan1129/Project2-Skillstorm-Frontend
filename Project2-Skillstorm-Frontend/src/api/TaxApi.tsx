@@ -66,8 +66,8 @@ export type Results = {
     result : number
 }
 
-const jwt = String(localStorage.getItem("JWT"))
-const email = String(localStorage.getItem("email"))
+const jwt = String(localStorage.getItem("JWT")).replace(/\"/g, "")
+const email = String(localStorage.getItem("email")).replace(/\"/g, "")
 
 
 // create the API calls
@@ -75,14 +75,16 @@ export const taxApi = createApi({
    
     reducerPath : 'taxApi',
     
-    baseQuery : fetchBaseQuery({baseUrl: 'http://ec2-3-238-52-15.compute-1.amazonaws.com:8080/'}),
+    baseQuery : fetchBaseQuery({baseUrl: 'http://localhost:8080/'}),
     endpoints : (builder) => ({
 
         // User endpoints
 
         findUser : builder.query<User, string>({
             query : () => {
+                console.log(`Bearer ${jwt}`);
                 return {
+                    method : 'GET',
                     url: `users/email?email=${email}`,
                     headers: {
                         "Authorization": `Bearer ${jwt}`,
@@ -95,7 +97,11 @@ export const taxApi = createApi({
                 return {
                     method : 'POST',
                     url : 'users/user',
-                    body : newUser
+                    body : newUser,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`,
+                        "Access-Control-Allow-Origin": "*"
+                    }
                 }
             }
         }),
@@ -106,7 +112,8 @@ export const taxApi = createApi({
                     url : 'users/user',
                     body : updateUser,
                     headers: {
-                        "Authorization": `Bearer ${jwt}`
+                        "Authorization": `Bearer ${jwt}`,
+                        "Access-Control-Allow-Origin": "*"
                     }
                 }
             }
@@ -125,7 +132,17 @@ export const taxApi = createApi({
         }),
 
         // Form 1099 endpoints
-        findForm1099 : builder.query<Form1099[], String>({query : (email) => `form1099/email/${email}`}),
+        findForm1099 : builder.query<Form1099[], String>({ query : () => {
+                console.log(`Bearer ${jwt}`);
+                return {
+                    method : 'GET',
+                    url: `form1099/email/${email}`,
+                    headers: {
+                        "Authorization": `Bearer ${jwt}`,
+                        "Access-Control-Allow-Origin": "*"
+                    }
+                }
+        }}),
         createForm1099 : builder.mutation<Form1099, Form1099>({
             query : (newForm1099) => {
                 return {
@@ -164,7 +181,17 @@ export const taxApi = createApi({
         }),
 
         // Form W2 endpoints
-        findFormW2 : builder.query<FormW2[], String>({query : (email) => `formW2/email/${email}`}),
+        findFormW2 : builder.query<FormW2[], String>({ query : () => {
+            console.log(`Bearer ${jwt}`);
+            return {
+                method : 'GET',
+                url: `formW2/email/${email}`,
+                headers: {
+                    "Authorization": `Bearer ${jwt}`,
+                    "Access-Control-Allow-Origin": "*"
+                }
+            }
+    }}),
         createFormW2 : builder.mutation<FormW2, FormW2>({
             query : (newFormW2) => {
                 return {
@@ -204,7 +231,17 @@ export const taxApi = createApi({
         
 
         // Results endpoint
-        findResults : builder.query<Results, String>({query : (email) => `taxforms/email/${email}`}),
+        findResults : builder.query<Results, String>({query : () => {
+            console.log(`Bearer ${jwt}`);
+            return {
+                method : 'GET',
+                url: `taxforms/email/${email}`,
+                headers: {
+                    "Authorization": `Bearer ${jwt}`,
+                    "Access-Control-Allow-Origin": "*"
+                }
+            }
+    }}),
     })
     
 })

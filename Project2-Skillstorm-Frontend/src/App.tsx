@@ -7,12 +7,9 @@ import EditIncomeInformation from "./components/EditIncomeInformation";
 import Results from "./components/Results";
 import { Provider } from "react-redux";
 import store from './store';
-<<<<<<< Updated upstream
-=======
 import React from 'react';
 import { Footer, Grid, Select } from '@trussworks/react-uswds';
 import { useTranslation } from 'react-i18next';
->>>>>>> Stashed changes
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -21,8 +18,6 @@ import PrivateRoute from './components/PrivateRoute';
 export default function App() {
 
   
-<<<<<<< Updated upstream
-=======
   const { i18n} = useTranslation();
     
   const footerPrimary = (
@@ -61,7 +56,6 @@ export default function App() {
       </div>
     </>
   )
->>>>>>> Stashed changes
 
     return (
       <>
@@ -69,7 +63,7 @@ export default function App() {
       <Router>
         <Nav />
             <Routes>
-              <Route path="/home" element ={<Login/>}/>
+              <Route path="/" element ={<Login/>}/>
               <Route path="/editAcc" element ={<PrivateRoute><EditAccount/></PrivateRoute>} />
               <Route path="/editTax" element ={<PrivateRoute><EditIncomeInformation/></PrivateRoute>} />
               <Route path="/results" element ={<PrivateRoute><Results/></PrivateRoute>} />

@@ -1,10 +1,7 @@
 import { Fieldset, Form, Grid, GridContainer, Label, TextInput, Button } from "@trussworks/react-uswds";
 import { taxApi } from "../api/TaxApi";
 import { useNavigate } from 'react-router-dom'
-<<<<<<< Updated upstream
-=======
 import { useTranslation } from "react-i18next";
->>>>>>> Stashed changes
 
 
 function Results() {
@@ -13,10 +10,7 @@ function Results() {
     const {data : results} = taxApi.useFindResultsQuery(email)
     const thisResults = results;
     const navigate = useNavigate();
-<<<<<<< Updated upstream
-=======
     const {t} = useTranslation();
->>>>>>> Stashed changes
 
 
     const handleSubmit = (event: any) => {

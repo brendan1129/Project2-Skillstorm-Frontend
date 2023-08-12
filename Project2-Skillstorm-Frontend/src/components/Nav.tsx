@@ -1,15 +1,8 @@
-<<<<<<< Updated upstream
-import { GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
-import { FunctionComponent, useEffect, useState } from "react";
-import './i18n.js';
-import { useTranslation } from "react-i18next";
-=======
 import {GovBanner, Header, PrimaryNav, Title } from "@trussworks/react-uswds";
 import { FunctionComponent, useEffect, useState } from "react";
 import './i18n.js';
 import { useTranslation } from "react-i18next";
 
->>>>>>> Stashed changes
 
 const Nav: FunctionComponent = () => {
 
@@ -23,7 +16,7 @@ const Nav: FunctionComponent = () => {
     }, []);
 
     const items = [
-        <a href="/home" key="one" className="usa-nav__link">
+        <a href="/" key="one" className="usa-nav__link">
           <span>Home</span>
         </a>,
         <a href="/editAcc" key="two" className="usa-nav__link">
@@ -36,11 +29,6 @@ const Nav: FunctionComponent = () => {
           <span>Results</span>
         </a>
     ];
-<<<<<<< Updated upstream
-    
-=======
-
->>>>>>> Stashed changes
   
     const onClick = (): void => setExpanded((prvExpanded) => !prvExpanded);
     
@@ -51,7 +39,7 @@ const Nav: FunctionComponent = () => {
           <div className="usa-nav-container">
             <div className="usa-navbar">
               <Title>
-                <a href="/home" title="home" aria-label="Home">{t("Login.Title")}</a>
+                <a href="/" title="home" aria-label="Home">{t("Login.Title")}</a>
               </Title>
             </div>
           <PrimaryNav

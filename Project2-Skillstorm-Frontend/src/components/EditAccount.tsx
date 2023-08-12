@@ -11,15 +11,12 @@ import { render, cleanup } from '@testing-library/react'
 const EditAccount = () => {
 
     // hooks in the queries from the API
-    const email = String(localStorage.getItem("email"))
+    const email = String(localStorage.getItem("email")).replace(/\"/g, "")
     const {data : user} = taxApi.useFindUserQuery(email);
     const [updateUser] = taxApi.useUpdateUserMutation();
     const thisUser = user;
     const navigate = useNavigate();
-<<<<<<< Updated upstream
-=======
-    const {t} = useTranslation();
->>>>>>> Stashed changes
+
 
    
     // sets the form to useState so changes can be read
@@ -109,13 +106,12 @@ const EditAccount = () => {
             .unwrap()
             .then( () => {
                 // shows Success alert
-               render(<><Alert className='usa-alert--success' type='success' headingLevel="h4" heading="Saved" style={{position:"fixed", top:0, left:0, width:"100%"}}/></>)
+               
                
                // transitions to the editTax page after 1.5 seconds
                window.setTimeout(() => {
-                cleanup()
                 navigate('/editTax')
-               }, 1500)
+               }, 1000)
                
 
           })
@@ -126,7 +122,7 @@ const EditAccount = () => {
         
 
     // this if makes sure the user GET API call has finished before the form is built. Date of Birth and Marital Status will not properly populate otherwise
-    if (thisUser?.maritalStatus !== undefined) {
+    if (thisUser?.email !== undefined) {
         return (
             // All classes and components found at https://trussworks.github.io/react-uswds/
             // and https://designsystem.digital.gov/how-to-use-uswds/
@@ -200,7 +196,9 @@ const EditAccount = () => {
                 </GridContainer>
              </div>
             );
-        
         }
+
+        
+
 }
 export default EditAccount;

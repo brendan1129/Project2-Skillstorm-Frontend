@@ -10,7 +10,7 @@ import { render, cleanup } from '@testing-library/react'
 function EditIncomeInformation() {
 
   // add API calls
-  const email = String(localStorage.getItem("email"))
+  const email = String(localStorage.getItem("email")).replace(/\"/g, "")
   const {data : form1099s, } = taxApi.useFindForm1099Query(email);
   const {data : formW2 } = taxApi.useFindFormW2Query(email);
   const [create1099] = taxApi.useCreateForm1099Mutation();
@@ -19,11 +19,6 @@ function EditIncomeInformation() {
   const [deleteW2] = taxApi.useDeleteFormW2Mutation();
   const thisForm1099s = form1099s;
   const thisFormW2 = formW2;
-<<<<<<< Updated upstream
-
-=======
-  const {t} = useTranslation();
->>>>>>> Stashed changes
   // useNavigate to change pages/refresh state
   const navigate = useNavigate();
 
